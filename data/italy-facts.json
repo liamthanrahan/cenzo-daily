@@ -1,0 +1,662 @@
+[
+  {
+    "title": "Rome Is Born",
+    "place": "Rome",
+    "era": "753 BC",
+    "text": "According to legend, Romulus founded Rome on 21 April 753 BC after quarrelling with his twin brother, Remus, over where the city should go. Romans still celebrate the date every year as the Natale di Roma, the city's birthday, with parades in ancient costume."
+  },
+  {
+    "title": "Ciao Means 'Your Servant'",
+    "place": "Venice",
+    "era": "Middle Ages",
+    "text": "The everyday greeting ciao comes from Venetian dialect. It began as s-ciào vostro, 'I am your servant' (literally 'your slave'), a polite phrase used on meeting someone. Over the centuries it shrank to a single friendly word, now used all over the world."
+  },
+  {
+    "title": "The Spanish Steps Were French",
+    "place": "Rome",
+    "era": "1725",
+    "text": "Rome's famous Spanish Steps, completed in 1725, were paid for with French money to connect the square below to the French church of Trinità dei Monti at the top. They take their name from the Spanish embassy that stood in the square."
+  },
+  {
+    "title": "The First Mention of Pizza",
+    "place": "Gaeta",
+    "era": "997",
+    "text": "The word 'pizza' first appears in a Latin document from Gaeta, south of Rome, in 997. A tenant agreed to give the local bishop twelve pizzas every Christmas and Easter. Nobody is sure what those pizzas actually looked like."
+  },
+  {
+    "title": "The Original Paparazzo",
+    "place": "Rome",
+    "era": "1960",
+    "text": "The word 'paparazzi' comes from Paparazzo, a pushy photographer in Federico Fellini's 1960 film La Dolce Vita. The name caught on for celebrity photographers everywhere. Fellini reportedly borrowed it from a character in an English travel book."
+  },
+  {
+    "title": "A Lab in Her Bedroom",
+    "place": "Turin",
+    "era": "1940s",
+    "text": "Barred from university work by Fascist racial laws, Rita Levi-Montalcini built a small laboratory in her bedroom in Turin and studied chick embryos using sharpened sewing needles. Her work led to the discovery of nerve growth factor and a Nobel Prize in 1986. She lived to 103."
+  },
+  {
+    "title": "The Etruscan Puzzle",
+    "place": "Tarquinia",
+    "era": "700s BC",
+    "text": "Before Rome dominated Italy, the Etruscans ruled much of the centre of the peninsula. We can read their alphabet, borrowed from the Greeks, and sound out their words, but their language is unrelated to its neighbours and is still only partly understood."
+  },
+  {
+    "title": "The Die Is Cast",
+    "place": "Rimini",
+    "era": "49 BC",
+    "text": "In January 49 BC, Julius Caesar led his army across the Rubicon, a small river near Rimini that marked the edge of his province. Bringing troops into Italy meant civil war. He is said to have declared alea iacta est: 'the die is cast'."
+  },
+  {
+    "title": "Goodbye to the King",
+    "place": "Rome",
+    "era": "1946",
+    "text": "On 2 June 1946, Italians voted in a referendum to abolish the monarchy and become a republic. It was the first national vote in which Italian women could take part. The date is now a national holiday, the Festa della Repubblica."
+  },
+  {
+    "title": "The Lopsided Gondola",
+    "place": "Venice",
+    "era": "1800s",
+    "text": "A gondola is deliberately asymmetrical: its left side is about 24 centimetres wider than its right. This counterbalances the gondolier, who stands at the back and rows on one side only, so the boat travels in a straight line."
+  },
+  {
+    "title": "Rome's Last King",
+    "place": "Rome",
+    "era": "509 BC",
+    "text": "Before it was a republic, Rome was ruled by kings, the last of them Etruscan. In 509 BC, according to Roman tradition, the Romans expelled the tyrant Tarquin the Proud and swore never to have a king again. They kept that promise for centuries, at least in name."
+  },
+  {
+    "title": "The Mona Lisa Heist",
+    "place": "Florence",
+    "era": "1911–1913",
+    "text": "In August 1911, the Mona Lisa vanished from the Louvre. The thief was Vincenzo Peruggia, an Italian handyman who believed the painting belonged in Italy. He kept it in his Paris room for two years, then tried to sell it to a dealer in Florence, who called the police."
+  },
+  {
+    "title": "Byron's Bridge of Sighs",
+    "place": "Venice",
+    "era": "c. 1600",
+    "text": "The Bridge of Sighs, finished around 1600, linked the Doge's Palace to the prisons. The romantic name came later, popularised by Lord Byron in the 1800s, who imagined prisoners sighing at their last glimpse of Venice through its little stone windows."
+  },
+  {
+    "title": "The Scandalous Fork",
+    "place": "Venice",
+    "era": "11th century",
+    "text": "Forks reached Venice in the 11th century with a Byzantine princess who married the doge Domenico Selvo and refused to eat with her fingers. Churchmen were shocked by such luxury. It took centuries for the fork to catch on in the rest of Europe."
+  },
+  {
+    "title": "An Eyewitness to Vesuvius",
+    "place": "Misenum",
+    "era": "AD 79",
+    "text": "Pliny the Younger watched Vesuvius erupt from across the bay and later described it in two letters, comparing the ash cloud to an umbrella pine. Volcanologists still call this kind of eruption 'Plinian'. His uncle, Pliny the Elder, died trying to rescue people."
+  },
+  {
+    "title": "Money Doesn't Smell",
+    "place": "Rome",
+    "era": "AD 70s",
+    "text": "Ancient Romans collected urine from public toilets for use in laundries and tanneries. Emperor Vespasian taxed it, and when his son complained, he held a coin to his nose and said pecunia non olet: 'money doesn't smell'. Italian public urinals are still called vespasiani."
+  },
+  {
+    "title": "The Smallest Country on Earth",
+    "place": "Vatican City",
+    "era": "1929",
+    "text": "Vatican City became an independent state on 11 February 1929, when the Lateran Treaty was signed by the Holy See and the Kingdom of Italy. At about 44 hectares, it is the smallest country in the world, roughly the size of 60 football fields."
+  },
+  {
+    "title": "Italy Unites",
+    "place": "Turin",
+    "era": "1861",
+    "text": "The Kingdom of Italy was proclaimed on 17 March 1861, with Victor Emmanuel II as its first king. Turin was the first capital, then Florence from 1865. Rome only joined the kingdom in 1870 and became the capital the following year."
+  },
+  {
+    "title": "The Azzurri's Royal Blue",
+    "place": "Milan",
+    "era": "1911",
+    "text": "Italy's national teams wear blue even though it isn't on the flag. The colour, Savoy blue, honours the royal House of Savoy, which ruled when the football team first wore blue shirts in 1911. The players have been the Azzurri, 'the blues', ever since."
+  },
+  {
+    "title": "The Oldest Republic",
+    "place": "San Marino",
+    "era": "301",
+    "text": "Tucked inside Italy, San Marino claims to be the world's oldest surviving republic. Tradition says it was founded in 301 by Marinus, a stonemason from the island of Rab in present-day Croatia, who was fleeing the persecution of Christians."
+  },
+  {
+    "title": "Why the Giro Leader Wears Pink",
+    "place": "Milan",
+    "era": "1931",
+    "text": "The Giro d'Italia cycling race was first held in 1909, organised by the newspaper La Gazzetta dello Sport. Since 1931, the race leader has worn the maglia rosa, a pink jersey, to match the paper's famous pink pages."
+  },
+  {
+    "title": "Forty Days Apart",
+    "place": "Venice",
+    "era": "1400s",
+    "text": "The word quarantine comes from the Venetian quaranta giorni, 'forty days'. During outbreaks of plague, ships arriving in Venice had to wait at anchor for forty days before anyone could come ashore. In 1423 the city also opened one of the first plague hospitals, on an island in the lagoon."
+  },
+  {
+    "title": "The Tractor Maker's Revenge",
+    "place": "Sant'Agata Bolognese",
+    "era": "1963",
+    "text": "Ferruccio Lamborghini made his fortune building tractors. According to the story, he complained to Enzo Ferrari about the clutch on his Ferrari and was brushed off, so he decided to build better sports cars himself. Automobili Lamborghini was founded in 1963."
+  },
+  {
+    "title": "Spectacles Are Invented",
+    "place": "Florence",
+    "era": "1306",
+    "text": "Eyeglasses were invented in northern Italy in the late 1200s. In 1306, the friar Giordano da Pisa told a congregation in Florence that the art of making spectacles had been discovered less than twenty years earlier, and that he had met the man who invented it."
+  },
+  {
+    "title": "A Travel Book From Prison",
+    "place": "Genoa",
+    "era": "c. 1298",
+    "text": "Marco Polo's account of his travels in China might never have been written if he hadn't been captured during a war between Venice and Genoa. In a Genoese prison around 1298, he dictated his stories to a fellow prisoner, the writer Rustichello da Pisa."
+  },
+  {
+    "title": "The First Casino",
+    "place": "Venice",
+    "era": "1638",
+    "text": "In 1638, Venice opened the Ridotto, a government-run gambling house often called the world's first public casino. The word 'casino' itself is Italian, meaning 'little house', a place for gatherings and entertainment."
+  },
+  {
+    "title": "A Typewriter for a Countess",
+    "place": "Fivizzano",
+    "era": "c. 1808",
+    "text": "One of the earliest typewriters was built around 1808 by Pellegrino Turri for his friend Countess Carolina Fantoni da Fivizzano, who was losing her sight. The machine itself is lost, but letters she typed on it survive."
+  },
+  {
+    "title": "Galileo Finds New Moons",
+    "place": "Padua",
+    "era": "1610",
+    "text": "In January 1610, Galileo Galilei pointed his home-made telescope at Jupiter and spotted four 'stars' that moved around it night after night. They were moons. He called them the Medicean Stars to flatter the Medici, his future patrons, but we now know them as the Galilean moons."
+  },
+  {
+    "title": "A Signal Across the Atlantic",
+    "place": "Bologna",
+    "era": "1901",
+    "text": "Guglielmo Marconi, born in Bologna in 1874, began experimenting with radio waves in his family's attic. In December 1901 he received a radio signal sent across the Atlantic, from Cornwall to Newfoundland. He shared the Nobel Prize in Physics in 1909, aged just 35."
+  },
+  {
+    "title": "News for a Small Coin",
+    "place": "Venice",
+    "era": "1500s",
+    "text": "The word 'gazette' comes from Venice. In the 1500s, handwritten news sheets about wars and trade were sold there, and one story is that they cost a gazeta, a small Venetian coin. Newspapers around the world are still called gazettes."
+  },
+  {
+    "title": "Months Named for Rulers",
+    "place": "Rome",
+    "era": "1st century BC",
+    "text": "July is named after Julius Caesar, who reformed the calendar in 46 BC and was born in that month. August honours his heir, Augustus. Their old names were Quintilis and Sextilis, the 'fifth' and 'sixth' months of the original Roman year, which began in March."
+  },
+  {
+    "title": "The Colosseum's Real Name",
+    "place": "Rome",
+    "era": "AD 80",
+    "text": "The Colosseum opened in AD 80 under Emperor Titus with 100 days of games. Its official name was the Flavian Amphitheatre. The nickname probably came from the Colossus, a giant bronze statue of Nero that stood nearby. It could seat around 50,000 spectators."
+  },
+  {
+    "title": "The Tomato Arrives",
+    "place": "Naples",
+    "era": "1692",
+    "text": "Tomatoes came from the Americas and were long treated with suspicion in Europe. The first known Italian recipe for tomato sauce, 'in the Spanish style', was published in Naples in 1692 by Antonio Latini. Today it's hard to imagine Italian food without them."
+  },
+  {
+    "title": "Mozzarella and the Water Buffalo",
+    "place": "Caserta",
+    "era": "Middle Ages",
+    "text": "Mozzarella di bufala is made from the milk of water buffalo, which have grazed the marshy plains of Campania since at least the Middle Ages. The name comes from mozzare, 'to cut off', describing how the cheese is torn into balls by hand."
+  },
+  {
+    "title": "Prosecco Is a Place",
+    "place": "Trieste",
+    "era": "2009",
+    "text": "Prosecco takes its name from a village near Trieste, and wine from the area was praised as far back as Roman times. Since 2009, only sparkling wine from a defined zone of north-east Italy can legally be sold as Prosecco."
+  },
+  {
+    "title": "The Chip With Two Initials",
+    "place": "Santa Clara",
+    "era": "1971",
+    "text": "Federico Faggin, a physicist from Vicenza, led the design of the Intel 4004, released in 1971 as the world's first commercial microprocessor. He signed his work: the initials F.F. are etched into the silicon. He went on to co-found Zilog, maker of the Z80."
+  },
+  {
+    "title": "A Mountain of Parmesan",
+    "place": "Parma",
+    "era": "1350s",
+    "text": "Parmigiano Reggiano has been made in the same area for around 900 years, first by Benedictine and Cistercian monks. In the Decameron, written in the 1350s, Boccaccio describes an imaginary land with a mountain of grated Parmesan, where people do nothing but make pasta."
+  },
+  {
+    "title": "The Land of Calves?",
+    "place": "Calabria",
+    "era": "Antiquity",
+    "text": "One theory says the name Italia comes from an ancient word meaning 'land of young cattle', related to the Latin vitulus, a calf. At first the name referred only to the southern tip of the peninsula, in today's Calabria, and it gradually spread north."
+  },
+  {
+    "title": "From National Shame to Capital of Culture",
+    "place": "Matera",
+    "era": "2019",
+    "text": "Matera's Sassi are cave homes carved into a ravine and lived in for thousands of years. In the 1950s their poverty was called a national disgrace and residents were moved out. Restored, the town was named a European Capital of Culture for 2019."
+  },
+  {
+    "title": "A Republic for 1,100 Years",
+    "place": "Venice",
+    "era": "697–1797",
+    "text": "According to tradition, Venice elected its first doge in 697. The Most Serene Republic lasted about 1,100 years, trading across the Mediterranean, until Napoleon's army arrived in 1797 and the last doge, Ludovico Manin, stepped down."
+  },
+  {
+    "title": "The Pantheon's Concrete Dome",
+    "place": "Rome",
+    "era": "c. AD 125",
+    "text": "The Pantheon was rebuilt under Emperor Hadrian around AD 125. Nearly 2,000 years later, its dome is still the largest unreinforced concrete dome in the world. The hole at the top, the oculus, is almost nine metres wide and is the building's only window."
+  },
+  {
+    "title": "The Broken Bench",
+    "place": "Siena",
+    "era": "1472",
+    "text": "Medieval Italian money-changers did business at a bench, or banco, which gave us the word 'bank'. 'Bankrupt' comes from banca rotta, a 'broken bench'. The oldest bank still operating today, Monte dei Paschi di Siena, was founded in 1472."
+  },
+  {
+    "title": "The Medieval Manhattan",
+    "place": "San Gimignano",
+    "era": "1300s",
+    "text": "The Tuscan hill town of San Gimignano once had around 72 towers, built by rival families trying to outdo each other. Fourteen still stand, which has earned it the nickname the medieval Manhattan."
+  },
+  {
+    "title": "Michelangelo's Only Signature",
+    "place": "Vatican City",
+    "era": "1499",
+    "text": "The Pietà in St Peter's Basilica is the only work Michelangelo ever signed. According to the biographer Vasari, he overheard visitors credit it to another sculptor, so he came back at night and carved his name across the Virgin's sash."
+  },
+  {
+    "title": "The Violin Master",
+    "place": "Cremona",
+    "era": "c. 1700",
+    "text": "Antonio Stradivari made violins, violas and cellos in Cremona for more than 60 years. Around 650 of his instruments survive, and the finest have sold for more than 15 million US dollars. Scientists still argue over what makes them sound so good."
+  },
+  {
+    "title": "The Oldest University",
+    "place": "Bologna",
+    "era": "1088",
+    "text": "The University of Bologna dates itself to 1088, which makes it the oldest university in the Western world. It began as a gathering of students who hired teachers to instruct them in law. Petrarch and Copernicus both studied there."
+  },
+  {
+    "title": "The Desktop Computer That Went to the Moon",
+    "place": "Ivrea",
+    "era": "1965",
+    "text": "Olivetti's Programma 101, unveiled in 1965, is often called the first commercially available desktop computer. It stored programs on magnetic cards, and NASA used it for calculations during the Apollo 11 mission. A small team in Ivrea led by Pier Giorgio Perotto designed it."
+  },
+  {
+    "title": "Hollywood on the Tiber",
+    "place": "Rome",
+    "era": "1937",
+    "text": "Cinecittà, Rome's film studio complex, opened in 1937. After the war, so many American productions filmed there, including Ben-Hur in 1959, that it became known as Hollywood on the Tiber. Federico Fellini made most of his films there."
+  },
+  {
+    "title": "The 'New City'",
+    "place": "Naples",
+    "era": "Ancient Greece",
+    "text": "Naples began as a Greek colony. Its name comes from the Greek Neapolis, 'new city', founded beside an older settlement called Parthenope. Greek was still spoken in the city long after it came under Roman rule."
+  },
+  {
+    "title": "Gelato for the Medici",
+    "place": "Florence",
+    "era": "1500s",
+    "text": "Florentine legend credits the architect Bernardo Buontalenti with serving an early gelato at the Medici court in the 1500s. In 1686 a Sicilian, Francesco Procopio dei Coltelli, opened the Café Procope in Paris, where his ices helped make Italian frozen desserts famous."
+  },
+  {
+    "title": "Glassmakers Sent to an Island",
+    "place": "Murano",
+    "era": "1291",
+    "text": "In 1291, Venice ordered its glass furnaces moved to the island of Murano, partly to protect the wooden city from fire. Murano's glassmakers became celebrated, but they were also forbidden to leave the Republic, so that their secrets stayed in Venice."
+  },
+  {
+    "title": "A Warship Before Dessert",
+    "place": "Venice",
+    "era": "1574",
+    "text": "Venice's Arsenale was one of the largest industrial sites in pre-industrial Europe, building ships in an early form of assembly line. In 1574, its workers reportedly put together a complete galley while King Henry III of France sat through a banquet."
+  },
+  {
+    "title": "Fibonacci Brings Numbers",
+    "place": "Pisa",
+    "era": "1202",
+    "text": "In 1202, Leonardo of Pisa, known as Fibonacci, published the Liber Abaci, introducing Europe to the Hindu-Arabic numerals 0 to 9 that he had seen traders use in North Africa. The book also contained a puzzle about breeding rabbits that gives us the Fibonacci sequence."
+  },
+  {
+    "title": "The Last Supper Survives a Bomb",
+    "place": "Milan",
+    "era": "1943",
+    "text": "Leonardo painted The Last Supper on a dry wall instead of wet plaster, so it began flaking within his lifetime. In August 1943, a bomb destroyed much of the monastery around it, but the wall survived, protected by sandbags and scaffolding."
+  },
+  {
+    "title": "David From a Rejected Block",
+    "place": "Florence",
+    "era": "1501–1504",
+    "text": "Michelangelo carved his David from a huge block of marble that other sculptors had started and abandoned decades earlier. He was 26 when he began. The finished statue, over five metres tall, was meant for the cathedral roof but was placed in the city's main square instead."
+  },
+  {
+    "title": "The Prancing Horse",
+    "place": "Lugo",
+    "era": "1923",
+    "text": "Ferrari's prancing horse first appeared on the plane of Francesco Baracca, Italy's top fighter pilot of the First World War. In 1923, Baracca's mother suggested Enzo Ferrari use it for luck. Ferrari added the yellow background, the colour of his home town, Modena."
+  },
+  {
+    "title": "Reading Scrolls Burned by Vesuvius",
+    "place": "Herculaneum",
+    "era": "2023",
+    "text": "The eruption of AD 79 carbonised a library of papyrus scrolls in a villa at Herculaneum. In 2023, a student used machine learning on X-ray scans to read the first word from inside a scroll that had never been unrolled. It was the Greek word for 'purple'."
+  },
+  {
+    "title": "The First Nativity Scene",
+    "place": "Greccio",
+    "era": "1223",
+    "text": "On Christmas Eve 1223, Saint Francis of Assisi set up a manger with a live ox and donkey in a cave at Greccio, so people could picture the birth of Christ. It is remembered as the first nativity scene, the start of Italy's beloved presepe tradition."
+  },
+  {
+    "title": "Fermi and the First Reactor",
+    "place": "Chicago",
+    "era": "1942",
+    "text": "Enrico Fermi, born in Rome, won the Nobel Prize in 1938 and used the trip to Stockholm to leave Fascist Italy, whose new racial laws threatened his Jewish wife. In 1942 in Chicago, his team built and ran the world's first nuclear reactor."
+  },
+  {
+    "title": "Coins in the Fountain",
+    "place": "Rome",
+    "era": "1762",
+    "text": "The Trevi Fountain was completed in 1762. Tradition says a coin tossed over your shoulder into it means you will return to Rome. Visitors throw in more than a million euros a year, which the city collects and gives to the charity Caritas."
+  },
+  {
+    "title": "The Lighthouse of the Mediterranean",
+    "place": "Stromboli",
+    "era": "Ongoing",
+    "text": "The volcano on the island of Stromboli has been erupting almost continuously for around 2,000 years, throwing up bursts of glowing lava every few minutes. Sailors used it to navigate at night, which earned it the nickname the Lighthouse of the Mediterranean."
+  },
+  {
+    "title": "The Pizza Fit for a Queen",
+    "place": "Naples",
+    "era": "1889",
+    "text": "In June 1889, Naples pizzaiolo Raffaele Esposito is said to have made a pizza for Queen Margherita of Savoy in the colours of the new Italian flag: red tomato, white mozzarella and green basil. Historians argue over the details, but the name Margherita stuck."
+  },
+  {
+    "title": "The Espresso Machine",
+    "place": "Turin",
+    "era": "1884",
+    "text": "In 1884, Angelo Moriondo of Turin patented a steam-powered machine for making coffee quickly and in bulk. In the late 1940s, Achille Gaggia's lever machines forced water through the grounds at high pressure, creating the golden crema that defines espresso today."
+  },
+  {
+    "title": "A Continent Named After a Florentine",
+    "place": "Florence",
+    "era": "1507",
+    "text": "The Florentine navigator Amerigo Vespucci argued that the lands across the Atlantic were a new continent, not part of Asia. In 1507, the German mapmaker Martin Waldseemüller labelled it 'America' in his honour, and the name stuck."
+  },
+  {
+    "title": "An Apology to Galileo",
+    "place": "Rome",
+    "era": "1992",
+    "text": "In 1633, the Inquisition forced Galileo to renounce his view that the Earth moves around the Sun, and he spent his final years under house arrest. In 1992, Pope John Paul II formally acknowledged that the Church had been wrong to condemn him."
+  },
+  {
+    "title": "Bologna's Skyline of Towers",
+    "place": "Bologna",
+    "era": "1100s",
+    "text": "In the Middle Ages, Bologna's wealthy families built tall towers as fortresses and status symbols, and there may have been around 100 of them. About 20 survive, including the Asinelli Tower, 97 metres tall, and its leaning neighbour, the Garisenda."
+  },
+  {
+    "title": "Elephants in the Alps",
+    "place": "Alps",
+    "era": "218 BC",
+    "text": "In 218 BC, the Carthaginian general Hannibal crossed the Alps into Italy with an army that included around 37 war elephants. Few of the elephants survived the cold, but Hannibal won crushing victories and fought on in Italy for 15 years."
+  },
+  {
+    "title": "Dante Writes in Italian",
+    "place": "Florence",
+    "era": "c. 1308–1321",
+    "text": "Dante Alighieri wrote the Divine Comedy in everyday Tuscan rather than Latin, the language of scholars. The poem was so widely read that Florentine became the basis of modern standard Italian, which is why Dante is often called the father of the Italian language."
+  },
+  {
+    "title": "A Lottery Born From Elections",
+    "place": "Genoa",
+    "era": "1500s",
+    "text": "Italy's Lotto has roots in 16th-century Genoa, where citizens placed bets on which candidates would be drawn to serve on the city's governing council. The betting proved so popular that it was eventually run with numbers instead of names."
+  },
+  {
+    "title": "The Father of Accounting",
+    "place": "Venice",
+    "era": "1494",
+    "text": "In 1494, the Franciscan friar Luca Pacioli published, in Venice, the first printed explanation of double-entry bookkeeping, the system used by Venetian merchants. Pacioli was also a friend of Leonardo da Vinci and taught him mathematics."
+  },
+  {
+    "title": "Galileo's Finger",
+    "place": "Florence",
+    "era": "1737",
+    "text": "When Galileo's body was moved to a grand tomb in Florence in 1737, admirers removed a few souvenirs, including the middle finger of his right hand. It is now displayed in a glass case at the Museo Galileo, pointing towards the sky."
+  },
+  {
+    "title": "Bankers to the Popes",
+    "place": "Florence",
+    "era": "1400s",
+    "text": "The Medici started as bankers in Florence and became one of the most powerful families in Europe. They paid artists like Botticelli and Michelangelo, ruled Florence for generations, and produced popes, including Leo X and Clement VII, and two queens of France."
+  },
+  {
+    "title": "Music Speaks Italian",
+    "place": "Venice",
+    "era": "1600s",
+    "text": "Musicians everywhere write piano, forte, allegro and crescendo because Italy led European music in the 1600s and 1700s. Italian composers and music printers set the standard, and their words for speed and volume became the international language of sheet music."
+  },
+  {
+    "title": "The Wasp",
+    "place": "Pontedera",
+    "era": "1946",
+    "text": "Piaggio launched the Vespa scooter in 1946 to get post-war Italy moving cheaply. On seeing the prototype, with its narrow waist and buzzing engine, Enrico Piaggio reportedly said it looked like a wasp, a vespa. The film Roman Holiday made it a star in 1953."
+  },
+  {
+    "title": "Thousands of Stone Towers",
+    "place": "Sardinia",
+    "era": "Bronze Age",
+    "text": "Sardinia is dotted with nuraghi, cone-shaped stone towers built from around 1800 BC by the island's Bronze Age people. Thousands survive, and the largest complex, Su Nuraxi at Barumini, is a World Heritage Site. Archaeologists still debate exactly what they were for."
+  },
+  {
+    "title": "Pinocchio's Debut",
+    "place": "Rome",
+    "era": "1881",
+    "text": "Carlo Collodi's Adventures of Pinocchio first appeared in instalments in a Roman children's magazine in 1881, and as a book in 1883. In the original story, the wooden puppet is far naughtier than in most later film versions."
+  },
+  {
+    "title": "One Bridge for 300 Years",
+    "place": "Venice",
+    "era": "1591",
+    "text": "The stone Rialto Bridge was completed in 1591. It replaced a series of wooden bridges, one of which collapsed under a crowd watching a wedding procession. For almost three centuries it was the only way to cross the Grand Canal on foot."
+  },
+  {
+    "title": "Ravenna's Glittering Mosaics",
+    "place": "Ravenna",
+    "era": "5th–6th centuries",
+    "text": "Ravenna became capital of the Western Roman Empire in 402, and later a Byzantine stronghold. Its churches are covered in gold and glass mosaics, including portraits of Emperor Justinian and Empress Theodora that are around 1,500 years old."
+  },
+  {
+    "title": "A Nation Learning Its Language",
+    "place": "Turin",
+    "era": "1861",
+    "text": "When Italy was unified in 1861, most Italians spoke regional dialects at home. Estimates suggest only 2.5 to 10 per cent could speak standard Italian. Schools, newspapers, the army and, later, radio and television slowly spread a shared national language."
+  },
+  {
+    "title": "Opera Is Born",
+    "place": "Mantua",
+    "era": "1607",
+    "text": "Opera was invented in Italy around 1600 by Florentine musicians trying to revive ancient Greek drama. Claudio Monteverdi's L'Orfeo, first performed in Mantua in 1607, is the earliest opera still regularly staged today."
+  },
+  {
+    "title": "The Venetian Who Reached Canada",
+    "place": "Bristol",
+    "era": "1497",
+    "text": "Giovanni Caboto, a Venetian citizen, sailed from Bristol in 1497 for King Henry VII of England and reached the coast of North America, probably Newfoundland. The English knew him as John Cabot."
+  },
+  {
+    "title": "The Oldest Film Festival",
+    "place": "Venice",
+    "era": "1932",
+    "text": "The Venice Film Festival was first held in 1932 on the terrace of the Hotel Excelsior on the Lido, making it the oldest film festival in the world. Its top prize is the Golden Lion, after the winged lion of Saint Mark, the symbol of Venice."
+  },
+  {
+    "title": "Where 'Ghetto' Comes From",
+    "place": "Venice",
+    "era": "1516",
+    "text": "In 1516, Venice forced its Jewish residents to live on a small island in the Cannaregio district, the site of an old copper foundry, or getto. The word 'ghetto' spread from there. The area still has historic synagogues and a Jewish community today."
+  },
+  {
+    "title": "The Thousand Red Shirts",
+    "place": "Marsala",
+    "era": "1860",
+    "text": "In May 1860, Giuseppe Garibaldi landed at Marsala in Sicily with about a thousand volunteers in red shirts. Within months they had taken Sicily and Naples, and Garibaldi handed southern Italy to King Victor Emmanuel II, making unification possible."
+  },
+  {
+    "title": "Michelangelo Stood Up",
+    "place": "Vatican City",
+    "era": "1508–1512",
+    "text": "Michelangelo painted the Sistine Chapel ceiling between 1508 and 1512 for Pope Julius II. Contrary to legend, he worked standing on scaffolding, craning his neck backwards. He wrote a comic poem complaining that his beard pointed at the sky and paint dripped onto his face."
+  },
+  {
+    "title": "Soft and Loud",
+    "place": "Florence",
+    "era": "c. 1700",
+    "text": "The piano was invented around 1700 by Bartolomeo Cristofori, keeper of instruments for the Medici in Florence. He called it a gravicembalo col piano e forte: a harpsichord that played soft or loud depending on how hard you struck the keys. The name was later shortened to 'piano'."
+  },
+  {
+    "title": "A Dome Without Scaffolding",
+    "place": "Florence",
+    "era": "1436",
+    "text": "Florence's cathedral had a gaping hole in its roof for decades because no one knew how to cover it. Filippo Brunelleschi built the dome without the usual wooden supports, using clever herringbone brickwork. Completed in 1436, it is still the largest brick dome ever built."
+  },
+  {
+    "title": "Birth of the Tricolore",
+    "place": "Reggio Emilia",
+    "era": "1797",
+    "text": "The green, white and red flag was first adopted as a national flag on 7 January 1797 by the Cispadane Republic, meeting in Reggio Emilia. Italy celebrates the date every year as Tricolour Day, the Festa del Tricolore."
+  },
+  {
+    "title": "An Island Ruled by Everyone",
+    "place": "Palermo",
+    "era": "Antiquity to today",
+    "text": "Sicily is the largest island in the Mediterranean. Over the centuries it was ruled by Greeks, Carthaginians, Romans, Byzantines, Arabs, Normans and Spaniards, and each left traces in its buildings, its dialect and its food."
+  },
+  {
+    "title": "The Queen of Roads",
+    "place": "Rome",
+    "era": "312 BC",
+    "text": "The Via Appia, begun in 312 BC by the censor Appius Claudius Caecus, ran from Rome to Capua and was later extended to Brindisi on the heel of Italy. Romans called it the regina viarum, the queen of roads, and stretches of its original paving can still be walked today."
+  },
+  {
+    "title": "Pasta Before Marco Polo",
+    "place": "Trabia",
+    "era": "1154",
+    "text": "A popular myth says Marco Polo brought pasta back from China. But in 1154, more than a century before his journey, the Arab geographer al-Idrisi described Trabia, a town near Palermo, making dried pasta and shipping it around the Mediterranean."
+  },
+  {
+    "title": "Pompeii's Autumn Surprise",
+    "place": "Pompeii",
+    "era": "AD 79",
+    "text": "For centuries, Vesuvius was said to have buried Pompeii on 24 August AD 79. But autumn fruit had long turned up in the ruins, and in 2018 archaeologists found a charcoal inscription dated to mid-October. Many historians now think the eruption happened in autumn."
+  },
+  {
+    "title": "A Horse Race With Few Rules",
+    "place": "Siena",
+    "era": "1600s",
+    "text": "Siena's Palio is run twice a year, on 2 July and 16 August, around the city's sloping main square. Ten of the city's 17 districts race bareback horses for about 90 seconds, and a horse can win even after throwing its rider."
+  },
+  {
+    "title": "The Swiss Guard",
+    "place": "Vatican City",
+    "era": "1506",
+    "text": "The Pope's bodyguards, the Pontifical Swiss Guard, have protected the Vatican since 1506, when Pope Julius II hired 150 Swiss soldiers. Recruits must still be Swiss Catholic men, and they wear striped uniforms in blue, red and yellow."
+  },
+  {
+    "title": "Who Made Tiramisu?",
+    "place": "Treviso",
+    "era": "1960s–70s",
+    "text": "Tiramisu, 'pick me up', is younger than many people think. It appeared in restaurants in the Veneto in the 1960s and 70s, and Le Beccherie in Treviso is often credited. Neighbouring Friuli Venezia Giulia disputes the claim, and the argument still goes on."
+  },
+  {
+    "title": "The First Woman Doctor of Philosophy",
+    "place": "Padua",
+    "era": "1678",
+    "text": "On 25 June 1678, Elena Lucrezia Cornaro Piscopia received a doctorate in philosophy from the University of Padua, the first woman known to earn a university doctorate. So many people came to watch that the ceremony was moved from the university to the cathedral."
+  },
+  {
+    "title": "A Coffee Named After Friars",
+    "place": "Rome",
+    "era": "1900s",
+    "text": "The cappuccino is named after the Capuchin friars, whose brown hooded robes matched the colour of coffee mixed with milk. The friars themselves were named after their pointed hood, the cappuccio."
+  },
+  {
+    "title": "Meucci's Telephone",
+    "place": "New York",
+    "era": "1850s",
+    "text": "Florence-born Antonio Meucci developed a voice-communication device in New York in the 1850s, but couldn't afford to renew his patent caveat. In 2002, the US House of Representatives passed a resolution honouring his work on the invention of the telephone."
+  },
+  {
+    "title": "Mountains Named After a Frenchman",
+    "place": "Cortina d'Ampezzo",
+    "era": "1790s",
+    "text": "The Dolomites are named after Déodat de Dolomieu, a French geologist who studied their unusual rock in the 1790s. The mineral was named dolomite in his honour, and the mountains took the name too."
+  },
+  {
+    "title": "A Tower That Leaned From the Start",
+    "place": "Pisa",
+    "era": "1173",
+    "text": "Work on Pisa's bell tower began in 1173, and it started to tilt after only three storeys because the ground beneath was soft clay and sand. Wars paused construction for decades, which luckily let the soil settle. Engineers straightened it by about 40 cm between 1990 and 2001."
+  },
+  {
+    "title": "The Last Emperor of the West",
+    "place": "Ravenna",
+    "era": "476",
+    "text": "In 476, the Germanic general Odoacer deposed the teenage emperor Romulus Augustulus at Ravenna. The date usually marks the end of the Western Roman Empire, and the last emperor's name, by coincidence, echoed both Rome's founder and its first emperor."
+  },
+  {
+    "title": "A Student's Anthem",
+    "place": "Genoa",
+    "era": "1847",
+    "text": "Italy's national anthem, Il Canto degli Italiani, was written in 1847 by Goffredo Mameli, a 20-year-old student who died two years later fighting for the Roman Republic. It was used provisionally from 1946 and only became the official anthem by law in 2017."
+  },
+  {
+    "title": "Arab Sicily's Gifts",
+    "place": "Palermo",
+    "era": "831–1091",
+    "text": "During more than two centuries of Arab rule, Sicily gained new irrigation systems and new crops, including citrus fruit, sugar cane and rice. Sicilian classics like arancini, cassata and granita owe a great deal to that period."
+  },
+  {
+    "title": "The First Battery",
+    "place": "Como",
+    "era": "1800",
+    "text": "In 1800, Alessandro Volta of Como stacked discs of zinc and copper separated by cloth soaked in salt water, creating the first electric battery, the voltaic pile. Napoleon was so impressed he later made Volta a count. The volt is named after him."
+  },
+  {
+    "title": "Carnival Behind a Mask",
+    "place": "Venice",
+    "era": "1979",
+    "text": "Masks let Venetians of every class mix freely during Carnevale. After the Republic fell in 1797 the festival faded, and masks were restricted under foreign rule. It was only fully revived in 1979, and now draws huge crowds each winter before Lent."
+  },
+  {
+    "title": "The Doctor Who Changed School",
+    "place": "Rome",
+    "era": "1907",
+    "text": "Maria Montessori was one of the first women to qualify as a doctor in Italy. In 1907 she opened her first Casa dei Bambini, a children's house, in a poor Rome neighbourhood, where her child-led teaching methods were born. Montessori schools now exist all over the world."
+  },
+  {
+    "title": "Houses You Could Take Apart",
+    "place": "Alberobello",
+    "era": "1600s",
+    "text": "Alberobello in Puglia is famous for its trulli, whitewashed stone huts with cone-shaped roofs, built without mortar. A popular story says the dry-stone design let owners quickly dismantle them to dodge taxes on new buildings."
+  },
+  {
+    "title": "Nutella's Wartime Roots",
+    "place": "Alba",
+    "era": "1946",
+    "text": "After the Second World War, chocolate was scarce and expensive in Italy. In 1946, Pietro Ferrero, a pastry maker in Alba, stretched it with local Piedmont hazelnuts to make an affordable paste. His family relaunched the recipe as Nutella in 1964."
+  },
+  {
+    "title": "Ötzi the Iceman",
+    "place": "Bolzano",
+    "era": "c. 3300 BC",
+    "text": "In 1991, hikers in the Alps near the Italian-Austrian border found a body in the ice. It was a man who had died about 5,300 years earlier, still with his copper axe, bow and clothes. Ötzi had more than 60 tattoos and now rests in a museum in Bolzano."
+  },
+  {
+    "title": "Leonardo's Mirror Writing",
+    "place": "Milan",
+    "era": "c. 1490s",
+    "text": "Leonardo da Vinci filled thousands of notebook pages in mirror writing, running from right to left. He was left-handed, and writing backwards may have stopped the ink smudging. In 1994 one notebook, the Codex Leicester, sold for over 30 million US dollars."
+  }
+]

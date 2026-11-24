@@ -1,0 +1,17 @@
+{
+  "name": "Cenzo",
+  "masthead": "The Cenzo Daily",
+  "firstIssue": "2026-12-25",
+  "location": {
+    "label": "Concord",
+    "latitude": -33.86,
+    "longitude": 151.1,
+    "timezone": "Australia/Sydney"
+  },
+  "thresholds": {
+    "hotMaxC": 32,
+    "coldMaxC": 13,
+    "windyGustKmh": 55,
+    "rainChancePct": 60
+  }
+}

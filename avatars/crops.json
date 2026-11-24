@@ -1,0 +1,13 @@
+{
+  "_comment": "Per-mood framing. zoom = fraction of the image width kept (0.94 is the widest without distortion); top = 0 crops from the top edge, 1 from the bottom.",
+  "sunny":  { "zoom": 0.86, "top": 0.3 },
+  "partly": { "zoom": 0.86, "top": 0.3 },
+  "cloudy": { "zoom": 0.86, "top": 0.3 },
+  "fog":    { "zoom": 0.94, "top": 0.3 },
+  "rain":   { "zoom": 0.94, "top": 0.2 },
+  "storm":  { "zoom": 0.94, "top": 0.0 },
+  "snow":   { "zoom": 0.86, "top": 0.3 },
+  "hot":    { "zoom": 0.94, "top": 0.2 },
+  "cold":   { "zoom": 0.86, "top": 0.3 },
+  "windy":  { "zoom": 0.94, "top": 0.3 }
+}

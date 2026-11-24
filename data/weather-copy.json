@@ -1,0 +1,47 @@
+{
+  "_comment": "Front-page weather headlines and photo captions, one set per avatar mood. {name} and {place} are filled in from config.json. A different variant is picked each day.",
+  "sunny": {
+    "headlines": ["Sun Shines on {place}", "Clear Skies Forecast; {name} Approves", "Glorious Day Ahead, Say Experts"],
+    "caption": "{name}, pictured, has the sunnies ready."
+  },
+  "partly": {
+    "headlines": ["Sun and Cloud to Share the Stage", "A Bit of Everything Today", "Mostly Fine, Mostly Smiling"],
+    "caption": "{name} keeps one eye on the sky."
+  },
+  "cloudy": {
+    "headlines": ["Grey Skies, Bright Spirits", "Clouds Roll In; {name} Unbothered", "Overcast, but Not Overwhelmed"],
+    "caption": "{name} remains cheerful despite the grey."
+  },
+  "fog": {
+    "headlines": ["Fog Descends: Visibility Low, Morale High", "{place} Wakes Up in the Clouds", "Mist Over {place}"],
+    "caption": "Our correspondent, somewhere in the fog."
+  },
+  "rain": {
+    "headlines": ["Umbrellas Out as Rain Moves In", "Wet Day Ahead: {name} Stays Dry", "Showers Expected Across {place}"],
+    "caption": "{name}, pictured, came prepared."
+  },
+  "storm": {
+    "headlines": ["Storm Warning! Batten Down the Hatches", "Thunder Rolls Over {place}", "Wild Weather Tests {name}'s Umbrella"],
+    "caption": "The umbrella did not survive. {name} did."
+  },
+  "snow": {
+    "headlines": ["Snow! Stop the Presses", "{place} Turns White", "Flakes Fall; Hot Chocolate Advised"],
+    "caption": "{name} braves the flurries."
+  },
+  "hot": {
+    "headlines": ["Scorcher! {name} Seeks Shade", "Heatwave Grips {place}", "Gelato Demand Expected to Soar"],
+    "caption": "{name} advises water, hats and gelato."
+  },
+  "cold": {
+    "headlines": ["Brr! Beanie Weather Returns", "Chilly Start; Scarves Advised", "Cold Snap Hits {place}"],
+    "caption": "{name}, bundled up for the occasion."
+  },
+  "windy": {
+    "headlines": ["Hold On to Your Hat", "Gusts Batter {place}", "Wind Tests {name}'s Hairdo"],
+    "caption": "{name}'s hair, pictured, losing the battle."
+  },
+  "unknown": {
+    "headlines": ["Weather Desk Out to Lunch"],
+    "caption": "Forecast unavailable. {name} advises looking out the window."
+  }
+}

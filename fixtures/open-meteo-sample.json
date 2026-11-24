@@ -1,0 +1,16 @@
+{
+  "latitude": -33.875,
+  "longitude": 151.25,
+  "timezone": "Australia/Sydney",
+  "daily": {
+    "time": ["2026-11-24"],
+    "weather_code": [80],
+    "temperature_2m_max": [24.6],
+    "temperature_2m_min": [17.8],
+    "precipitation_probability_max": [70],
+    "uv_index_max": [9.15],
+    "sunrise": ["2026-11-24T05:42"],
+    "sunset": ["2026-11-24T19:48"],
+    "wind_gusts_10m_max": [31.7]
+  }
+}
