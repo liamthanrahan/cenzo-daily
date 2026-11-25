@@ -2,10 +2,17 @@ name: Print today's paper
 
 on:
   schedule:
-    # Cron runs in UTC. 18:23 UTC is 5:23 am in Sydney during daylight saving
-    # and 4:23 am outside it, so the paper is ready before anyone wakes up.
-    # (Odd minute on purpose: GitHub delays jobs scheduled on the hour.)
-    - cron: "23 18 * * *"
+    # Sydney time, all year round. GitHub can delay or drop scheduled runs, so the
+    # later slots are backups: each one reprints the day's paper, whether or not an
+    # earlier slot ran. (Odd minutes on purpose: GitHub is busiest on the hour.)
+    - cron: "23 4 * * *"
+      timezone: "Australia/Sydney"
+    - cron: "11 5 * * *"
+      timezone: "Australia/Sydney"
+    - cron: "52 5 * * *"
+      timezone: "Australia/Sydney"
+    - cron: "37 6 * * *"
+      timezone: "Australia/Sydney"
   push:
     branches: [main]
   workflow_dispatch:
