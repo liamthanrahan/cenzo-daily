@@ -2,12 +2,11 @@ name: Print today's paper
 
 on:
   schedule:
-    # Sydney time, all year round. GitHub often starts scheduled runs hours late
-    # (about 7 hours for this repo so far) and can drop them, so this asks for a
-    # print every hour from 6:23 pm to 5:23 am. Runs that land between midnight and
-    # breakfast give the morning paper; the rest just reprint the day's paper.
+    # Once a day, just after midnight Sydney time, so even an on-time run prints the
+    # right day. GitHub often starts scheduled runs hours late (about 7 hours for
+    # this repo so far), so expect the paper some time in the morning.
     # (Minute 23 on purpose: GitHub is busiest on the hour.)
-    - cron: "23 18-23,0-5 * * *"
+    - cron: "23 0 * * *"
       timezone: "Australia/Sydney"
   push:
     branches: [main]

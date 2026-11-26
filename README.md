@@ -69,7 +69,7 @@ Extra flags: `--date=2027-01-01` prints a given day, and `--mood=storm` forces a
 A few things to know:
 
 - **GitHub Pages is public**, even if the repo is private. Keep the location in `config.json` to suburb level (two decimal places is about 1 km), and remember the avatar is public too.
-- **The paper prints overnight, Sydney time.** GitHub often starts scheduled runs hours late (about 7 hours for this repo so far) and can drop them, so the workflow asks for a print every hour from 6:23 pm to 5:23 am. Runs that land between midnight and breakfast give the morning paper; the rest just reprint the day's paper. Change the `cron` and `timezone` lines in `.github/workflows/daily.yml` to move them.
+- **The paper prints once a day, at 12:23 am Sydney time.** GitHub often starts scheduled runs hours late (about 7 hours for this repo so far), so expect it some time in the morning. Change the `cron` and `timezone` lines in `.github/workflows/daily.yml` to move it.
 - **GitHub turns off scheduled workflows after 60 days of repo inactivity.** The workflow re-enables itself on each run to prevent that. If the paper ever stops updating, check the Actions tab first.
 - If the weather API is down, the paper still prints, with the weather desk "out to lunch".
 
