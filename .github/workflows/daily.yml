@@ -2,16 +2,12 @@ name: Print today's paper
 
 on:
   schedule:
-    # Sydney time, all year round. GitHub can delay or drop scheduled runs, so the
-    # later slots are backups: each one reprints the day's paper, whether or not an
-    # earlier slot ran. (Odd minutes on purpose: GitHub is busiest on the hour.)
-    - cron: "23 4 * * *"
-      timezone: "Australia/Sydney"
-    - cron: "11 5 * * *"
-      timezone: "Australia/Sydney"
-    - cron: "52 5 * * *"
-      timezone: "Australia/Sydney"
-    - cron: "37 6 * * *"
+    # Sydney time, all year round. GitHub often starts scheduled runs hours late
+    # (about 7 hours for this repo so far) and can drop them, so this asks for a
+    # print every hour from 6:23 pm to 5:23 am. Runs that land between midnight and
+    # breakfast give the morning paper; the rest just reprint the day's paper.
+    # (Minute 23 on purpose: GitHub is busiest on the hour.)
+    - cron: "23 18-23,0-5 * * *"
       timezone: "Australia/Sydney"
   push:
     branches: [main]
