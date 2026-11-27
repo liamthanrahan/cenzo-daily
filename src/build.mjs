@@ -5,7 +5,7 @@
 //   npm run gallery          one image per avatar mood -> out/gallery/*.png
 //
 // Options: --sample, --gallery, --mood=<mood>, --date=YYYY-MM-DD
-import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, access, cp } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
@@ -170,6 +170,10 @@ async function main() {
 <body style="margin:0;display:grid;place-items:center;min-height:100vh;background:#ddd">
 <img src="dashboard.png" width="800" height="480" alt="${content.masthead}, ${content.date.en}" style="box-shadow:0 4px 24px #0003">`,
     );
+    // Extra pages published as they are, e.g. static/render-test.html
+    await cp(path.join(ROOT, 'static'), OUT, { recursive: true }).catch((err) => {
+      if (err.code !== 'ENOENT') throw err;
+    });
     console.log(`Printed ${content.issue.label}: "${content.weather.headline}" / "${content.fact.title}"`);
   } finally {
     await browser.close();
