@@ -9,9 +9,10 @@
 //   top:  where to take the crop vertically (0 = top edge, 1 = bottom edge)
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'avatars/source');
 const OUT = path.join(ROOT, 'template/avatars');
 export const AVATAR_W = 134; // the avatar box is 138 × 146 including its 2px border

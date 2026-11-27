@@ -2,11 +2,11 @@ name: Print today's paper
 
 on:
   schedule:
-    # Once a day, just after midnight Sydney time, so even an on-time run prints the
-    # right day. GitHub often starts scheduled runs hours late (about 7 hours for
-    # this repo so far), so expect the paper some time in the morning.
+    # Once a day, the evening before, Sydney time. GitHub has been starting this
+    # repo's scheduled runs about 7-9 hours late, so this lands in the early morning.
+    # Runs from 6 pm onwards print the next day's paper, so an on-time run is fine too.
     # (Minute 23 on purpose: GitHub is busiest on the hour.)
-    - cron: "23 0 * * *"
+    - cron: "23 21 * * *"
       timezone: "Australia/Sydney"
   push:
     branches: [main]

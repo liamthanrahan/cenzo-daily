@@ -6,7 +6,7 @@
 //
 // Options: --sample, --gallery, --mood=<mood>, --date=YYYY-MM-DD
 import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
@@ -14,7 +14,7 @@ import { getWeather } from './weather.mjs';
 import { buildContent } from './content.mjs';
 import { prepareAvatars } from './prepare-avatars.mjs';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'out');
 const WIDTH = 800;
 const HEIGHT = 480;
@@ -112,14 +112,32 @@ async function renderPage(browser, content) {
   return toEpaper(shot);
 }
 
+// Runs from this hour (local time) onwards print tomorrow's issue.
+const NEXT_DAY_FROM_HOUR = 18;
+
+const localHour = (date, timeZone) =>
+  Number(new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', hourCycle: 'h23' }).format(date));
+
+// "2026-11-28" in the given time zone
+const localDate = (date, timeZone) =>
+  new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
+
 async function main() {
   const config = await readJson('config.json');
   const facts = await readJson('data/italy-facts.json');
   const copy = await readJson('data/weather-copy.json');
-  const now = args.date ? new Date(`${args.date}T06:00:00Z`) : new Date();
+  const tz = config.location.timezone;
+  const printedAt = new Date();
+  // The day this issue is for. From the evening on, a run prints the next morning's paper,
+  // so the daily slot can be scheduled the night before (GitHub often runs it hours late).
+  const now = args.date
+    ? new Date(`${args.date}T06:00:00Z`)
+    : localHour(printedAt, tz) >= NEXT_DAY_FROM_HOUR
+      ? new Date(printedAt.getTime() + 86400000)
+      : printedAt;
   const artwork = new Set(await prepareAvatars());
   if (artwork.size) console.log(`Avatar artwork: ${[...artwork].join(', ')}`);
-  const weather = await getWeather(config.location, { sample: Boolean(args.sample || args.gallery) });
+  const weather = await getWeather(config.location, { sample: Boolean(args.sample || args.gallery), day: args.date ? undefined : localDate(now, tz) });
 
   const browser = await puppeteer.launch({
     executablePath: await findChrome(),
@@ -143,7 +161,7 @@ async function main() {
       return;
     }
 
-    const content = withAvatar(buildContent({ config, weather, facts, copy, now, moodOverride: args.mood }), artwork);
+    const content = withAvatar(buildContent({ config, weather, facts, copy, now, printedAt, moodOverride: args.mood }), artwork);
     await writeFile(path.join(OUT, 'dashboard.png'), await renderPage(browser, content));
     await writeFile(path.join(OUT, 'data.json'), JSON.stringify({ generatedAt: new Date().toISOString(), ...content }, null, 2));
     await writeFile(
