@@ -1,6 +1,6 @@
 # The Cenzo Daily
 
-A newspaper front page for an 800 × 480 ePaper display, printed fresh every morning.
+A newspaper front page for an 800 × 480 ePaper display, drawn fresh every time the display refreshes.
 
 Each issue has:
 
@@ -10,26 +10,26 @@ Each issue has:
 
 ## How it works
 
+The device shows a web page, `/live/`, through Seeedash's HTML widget. Seeed's servers load the page at every refresh and send the device a picture of it. Each time it's loaded, the page:
+
+1. works out today's date in Sydney time (whatever time zone the renderer is in)
+2. fetches the forecast from Open-Meteo (free, no API key)
+3. fills `template/index.html` with the weather, the day's story and the right avatar
+
+So every refresh shows that moment's paper, and nothing needs to run on a schedule. The browser code is `src/live.mjs`, using the same `src/content.mjs` and `src/forecast.mjs` as the build.
+
+If the forecast can't be fetched, the paper still prints, with the weather desk "out to lunch". If the page can't load its own data at all, it shows the masthead, today's date and "Edizione in ritardo · Today's edition is delayed", with the reason in small type, rather than an old paper.
+
+GitHub Actions publishes the site to GitHub Pages whenever `main` changes:
+
 ```
-GitHub Actions (every morning)
-  ├─ fetches the forecast from Open-Meteo (free, no API key)
-  ├─ fills template/index.html with the weather, the day's story and the right avatar
-  ├─ screenshots it at 800 × 480 in headless Chrome
-  ├─ snaps every pixel to the panel's 4 greys
-  └─ publishes to GitHub Pages:
-        /dashboard.png   ← the device downloads this
-        /data.json       ← the same content as data, if you'd rather draw it on-device
-        /index.html      ← preview in a browser
-        /live/           ← the live page (see below)
+/live/           ← the live page: point the device here
+/dashboard.png   ← the paper as printed at publish time, snapped to the panel's 4 greys
+/data.json       ← the same content as data
+/index.html      ← dashboard.png in a browser
 ```
 
-The display only has to wake up, download one PNG, show it and go back to sleep. All the logic lives here, so changing the paper never means reflashing the device.
-
-### The live page
-
-`/live/` is the same front page, drawn in the browser each time it's loaded: it works out today's date in Sydney time, fetches the forecast and fills the template with the same code the build uses (`src/live.mjs`, `src/content.mjs`, `src/forecast.mjs`). Point Seeedash's HTML widget at it and every refresh shows that moment's paper, so it doesn't depend on when GitHub runs the scheduled build.
-
-If the forecast can't be fetched, it prints with the weather desk "out to lunch". If the page can't load its data at all, it shows the last printed `dashboard.png` with a small note saying why.
+`dashboard.png` is printed by screenshotting the same template in headless Chrome. It's handy for previews, or for firmware that can only show an image, but it only changes when the site is published.
 
 ## Make it yours
 
@@ -39,6 +39,7 @@ If the forecast can't be fetched, it prints with the weather desk "out to lunch"
 | Layout, fonts, sizes | `template/index.html`, `template/style.css` |
 | The avatar artwork | `avatars/source/<mood>.jpg` (see below) |
 | The drawn fallback avatar | the `<g id="person">` group in `template/index.html` |
+| Weather icons | the `#sky-icon` glyphs in `template/index.html` ([Weather Icons](https://erikflowers.github.io/weather-icons/) font) |
 | What makes it "hot", "cold" or "windy" | `thresholds` in `config.json` |
 | Weather headlines and photo captions | `data/weather-copy.json` |
 | History stories | `data/italy-facts.json` |
@@ -70,27 +71,21 @@ Extra flags: `--date=2027-01-01` prints a given day, and `--mood=storm` forces a
 
 1. Push to GitHub.
 2. In **Settings → Pages**, set **Source** to **GitHub Actions**.
-3. Run the **Print today's paper** workflow once by hand from the **Actions** tab.
-4. The image is now at `https://<user>.github.io/<repo>/dashboard.png`.
+3. Run the **Publish the paper** workflow once by hand from the **Actions** tab (later pushes to `main` publish automatically).
+4. The live page is now at `https://<user>.github.io/<repo>/live/`.
 
-A few things to know:
-
-- **GitHub Pages is public**, even if the repo is private. Keep the location in `config.json` to suburb level (two decimal places is about 1 km), and remember the avatar is public too.
-- **The paper is scheduled for 9:23 pm Sydney time, the evening before.** GitHub has been starting this repo's scheduled runs about 7–9 hours late, so it usually prints in the early morning. Any run from 6 pm onwards prints the next day's paper (date, story and forecast), so an on-time run still gives the right issue. Change the `cron` and `timezone` lines in `.github/workflows/daily.yml` to move it, and `NEXT_DAY_FROM_HOUR` in `src/build.mjs` to change the 6 pm cut-off.
-- **GitHub turns off scheduled workflows after 60 days of repo inactivity.** The workflow re-enables itself on each run to prevent that. If the paper ever stops updating, check the Actions tab first.
-- If the weather API is down, the paper still prints, with the weather desk "out to lunch".
+**GitHub Pages is public**, even if the repo is private. Keep the location in `config.json` to suburb level (two decimal places is about 1 km), and remember the avatar is public too.
 
 ## The device
 
-Built for the Seeed Studio **reTerminal E1001** (ESP32-S3, 7.5" 800 × 480, 4-grey ePaper). The firmware just needs to:
+Built for the Seeed Studio **reTerminal E1001** (ESP32-S3, 7.5" 800 × 480, 4-grey ePaper), running Seeed's stock firmware:
 
-1. connect to Wi-Fi
-2. fetch `dashboard.png`
-3. draw it
-4. deep sleep until tomorrow morning, or until a button is pressed
+1. In Seeedash, add an **HTML** widget to the canvas, set its URL to `https://<user>.github.io/<repo>/live/` and apply the design to the device.
+2. Set the device's **Interval** (we use 6 hours). Each refresh, Seeed loads the page, waits for it and sends the device a picture; pressing the device's refresh button does the same straight away.
+3. Choose the **4-Level Grayscale** option. The page only uses `#000`, `#555`, `#aaa` and `#fff`, the panel's four shades.
 
-The device can equally run Seeed's SenseCraft HMI, ESPHome/Home Assistant or TRMNL instead. Nothing here locks it in.
+Other firmware (ESPHome/Home Assistant, TRMNL, or your own) can show `dashboard.png` instead, but that image only changes when the site is published.
 
 ## Credits
 
-Forecasts from [Open-Meteo](https://open-meteo.com) (CC BY 4.0). Fonts: UnifrakturMaguntia, Old Standard TT and Libre Caslon Text, all under the SIL Open Font License, via Fontsource.
+Forecasts from [Open-Meteo](https://open-meteo.com) (CC BY 4.0). Fonts: UnifrakturMaguntia, Old Standard TT and Libre Caslon Text, all under the SIL Open Font License, via Fontsource. Weather icons: [Weather Icons](https://erikflowers.github.io/weather-icons/) by Erik Flowers, SIL Open Font License.

@@ -1,13 +1,9 @@
-name: Print today's paper
+name: Publish the paper
 
+# Publishes the site (the live page, plus dashboard.png and data.json for previews)
+# whenever main changes. There's no schedule: the live page draws each day's paper
+# itself when the device refreshes.
 on:
-  schedule:
-    # Once a day, the evening before, Sydney time. GitHub has been starting this
-    # repo's scheduled runs about 7-9 hours late, so this lands in the early morning.
-    # Runs from 6 pm onwards print the next day's paper, so an on-time run is fine too.
-    # (Minute 23 on purpose: GitHub is busiest on the hour.)
-    - cron: "23 21 * * *"
-      timezone: "Australia/Sydney"
   push:
     branches: [main]
   workflow_dispatch:
@@ -16,7 +12,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  actions: write # only used by the keep-alive step below
 
 concurrency:
   group: pages
@@ -44,15 +39,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: out
-
-      # GitHub switches off scheduled workflows in repos with no activity for 60 days.
-      # Re-enabling the workflow on each scheduled run keeps the paper printing.
-      - name: Keep the schedule alive
-        if: github.event_name == 'schedule'
-        continue-on-error: true
-        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/daily.yml/enable"
-        env:
-          GH_TOKEN: ${{ github.token }}
 
   deploy:
     needs: build

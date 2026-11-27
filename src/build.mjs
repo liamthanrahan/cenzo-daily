@@ -53,7 +53,7 @@ async function publishLivePage({ config, facts, copy, artwork }) {
   // Fonts: point the stylesheet at copies next to it instead of node_modules.
   const fonts = [];
   const css = (await readFile(path.join(ROOT, 'template/style.css'), 'utf8')).replace(
-    /url\('(\.\.\/node_modules\/[^']+\/([^'/]+\.woff2))'\)/g,
+    /url\('(\.\.\/node_modules\/[^']+\/([^'/]+\.woff2?))'\)/g,
     (_, rel, file) => { fonts.push([rel, file]); return `url('fonts/${file}')`; },
   );
   for (const [rel, file] of fonts) await cp(path.join(ROOT, 'template', rel), path.join(dir, 'fonts', file));
@@ -126,25 +126,12 @@ async function renderPage(browser, content) {
   return toEpaper(shot);
 }
 
-// Runs from this hour (local time) onwards print tomorrow's issue.
-const NEXT_DAY_FROM_HOUR = 18;
-
-const localHour = (date, timeZone) =>
-  Number(new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', hourCycle: 'h23' }).format(date));
-
 async function main() {
   const config = await readJson('config.json');
   const facts = await readJson('data/italy-facts.json');
   const copy = await readJson('data/weather-copy.json');
   const tz = config.location.timezone;
-  const printedAt = new Date();
-  // The day this issue is for. From the evening on, a run prints the next morning's paper,
-  // so the daily slot can be scheduled the night before (GitHub often runs it hours late).
-  const now = args.date
-    ? new Date(`${args.date}T06:00:00Z`)
-    : localHour(printedAt, tz) >= NEXT_DAY_FROM_HOUR
-      ? new Date(printedAt.getTime() + 86400000)
-      : printedAt;
+  const now = args.date ? new Date(`${args.date}T06:00:00Z`) : new Date();
   const artwork = new Set(await prepareAvatars());
   if (artwork.size) console.log(`Avatar artwork: ${[...artwork].join(', ')}`);
   const weather = await getWeather(config.location, { sample: Boolean(args.sample || args.gallery), day: args.date ? undefined : localDate(now, tz) });
@@ -171,7 +158,7 @@ async function main() {
       return;
     }
 
-    const content = withAvatar(buildContent({ config, weather, facts, copy, now, printedAt, moodOverride: args.mood }), artwork);
+    const content = withAvatar(buildContent({ config, weather, facts, copy, now, moodOverride: args.mood }), artwork);
     await writeFile(path.join(OUT, 'dashboard.png'), await renderPage(browser, content));
     await writeFile(path.join(OUT, 'data.json'), JSON.stringify({ generatedAt: new Date().toISOString(), ...content }, null, 2));
     await writeFile(
@@ -181,10 +168,6 @@ async function main() {
 <img src="dashboard.png" width="800" height="480" alt="${content.masthead}, ${content.date.en}" style="box-shadow:0 4px 24px #0003">`,
     );
     await publishLivePage({ config, facts, copy, artwork });
-    // Extra pages published as they are, e.g. static/render-test.html
-    await cp(path.join(ROOT, 'static'), OUT, { recursive: true }).catch((err) => {
-      if (err.code !== 'ENOENT') throw err;
-    });
     console.log(`Printed ${content.issue.label}: "${content.weather.headline}" / "${content.fact.title}"`);
   } finally {
     await browser.close();

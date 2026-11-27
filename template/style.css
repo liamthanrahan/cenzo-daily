@@ -8,6 +8,7 @@
 @font-face { font-family: 'Body'; font-weight: 400; src: url('../node_modules/@fontsource/libre-caslon-text/files/libre-caslon-text-latin-400-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Body'; font-weight: 400; font-style: italic; src: url('../node_modules/@fontsource/libre-caslon-text/files/libre-caslon-text-latin-400-italic.woff2') format('woff2'); }
 @font-face { font-family: 'Body'; font-weight: 700; src: url('../node_modules/@fontsource/libre-caslon-text/files/libre-caslon-text-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'WeatherIcons'; src: url('../node_modules/weather-icons/font/weathericons-regular-webfont.woff') format('woff'); }
 
 :root {
   --ink: #000;
@@ -130,7 +131,7 @@ html, body { width: 800px; height: 480px; overflow: hidden; background: var(--pa
   margin-top: 3px;
 }
 .w-now { flex: 1; min-width: 0; }
-#sky-icon { width: 40px; height: 40px; display: block; }
+#sky-icon { width: 40px; height: 40px; display: block; font: 34px/40px 'WeatherIcons'; text-align: center; }
 .temp {
   font-family: 'Headline';
   font-weight: 700;

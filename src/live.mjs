@@ -7,14 +7,18 @@
 import { buildContent, withAvatar } from './content.mjs';
 import { fetchForecast, localDate } from './forecast.mjs';
 
+// Used for the "delayed" notice if paper.json (which holds the real setting) didn't load.
+let timeZone = 'Australia/Sydney';
+
 async function main() {
   const res = await fetch('paper.json', { cache: 'no-cache' });
   if (!res.ok) throw new Error(`paper.json: ${res.status}`);
   const { config, facts, copy, artwork } = await res.json();
+  timeZone = config.location.timezone;
 
   const now = new Date();
   // Kept short: the renderer takes its picture after about 30 seconds.
-  const weather = await fetchForecast(config.location, localDate(now, config.location.timezone), {
+  const weather = await fetchForecast(config.location, localDate(now, timeZone), {
     attempts: 2,
     timeoutMs: 8000,
     pauseMs: 1000,
@@ -28,17 +32,34 @@ async function main() {
   document.documentElement.dataset.ready = 'true';
 }
 
-main().catch(async (err) => {
-  // Something broke before the paper could be drawn. Show the last paper the build printed
-  // (dashboard.png) instead of a half-empty template, with the reason in a small note.
-  console.error(err);
-  const img = new Image(800, 480);
-  img.src = '../dashboard.png';
-  img.style.cssText = 'position:fixed;inset:0;';
-  const note = document.createElement('div');
-  note.textContent = `Last printed paper. Live page failed: ${err.message}`;
-  note.style.cssText = 'position:fixed;right:8px;bottom:4px;padding:2px 6px;background:#fff;border:1px solid #000;font:11px Arial,sans-serif;';
-  document.body.append(img, note);
-  await img.decode().catch(() => {});
+// Something broke before the paper could be drawn. Keep the masthead, put today's date in
+// the dateline (that needs no data) and say the edition is delayed, with the reason in
+// small type. Never shows an old paper, so nothing on screen is out of date.
+async function showDelayed(err) {
+  const now = new Date();
+  const fmt = (locale, opts) => new Intl.DateTimeFormat(locale, { timeZone, ...opts }).format(now);
+  document.getElementById('issue').textContent = 'Edizione in ritardo';
+  document.getElementById('date-en').textContent = fmt('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('date-it').textContent = fmt('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+  document.getElementById('edition').textContent = 'Delayed edition';
+
+  const dateline = document.querySelector('.dateline');
+  for (let el = dateline.nextElementSibling; el; el = el.nextElementSibling) el.style.display = 'none';
+
+  const notice = document.createElement('section');
+  notice.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;';
+  notice.innerHTML = `
+    <div style="font:700 44px/1.1 'Headline',Georgia,serif">Edizione in ritardo</div>
+    <div style="font:italic 26px/1.3 'Body',Georgia,serif">Today's edition is delayed.<br>The presses will try again at the next refresh.</div>
+    <div style="font:12px/1.3 Arial,sans-serif;color:#555;max-width:640px" id="delayed-reason"></div>`;
+  notice.querySelector('#delayed-reason').textContent = `Reason: ${err.message}`;
+  dateline.after(notice);
+
+  await document.fonts.ready;
   document.documentElement.dataset.ready = 'error';
+}
+
+main().catch((err) => {
+  console.error(err);
+  return showDelayed(err);
 });

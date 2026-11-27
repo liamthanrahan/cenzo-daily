@@ -90,8 +90,7 @@ export const smartQuotes = (s) =>
 
 const fill = (s, vars) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
 
-// `now` is the day the issue is for; `printedAt` is when it was actually printed.
-export function buildContent({ config, weather, facts, copy, now = new Date(), printedAt = now, moodOverride }) {
+export function buildContent({ config, weather, facts, copy, now = new Date(), moodOverride }) {
   const tz = config.location.timezone;
   const today = localDay(now, tz);
   const first = Date.parse(config.firstIssue) / 86400000;
@@ -110,7 +109,7 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), p
   const [condEn, condIt, icon] = weather ? CONDITIONS[weather.code] ?? CONDITIONS[3] : ['No forecast', 'nessuna previsione', 'cloud'];
   const uvBand = weather?.uv != null ? UV.find(([min]) => weather.uv >= min) : null;
 
-  const fmt = (locale, opts, date = now) => new Intl.DateTimeFormat(locale, { timeZone: tz, ...opts }).format(date);
+  const fmt = (locale, opts) => new Intl.DateTimeFormat(locale, { timeZone: tz, ...opts }).format(now);
 
   return {
     masthead: config.masthead,
@@ -123,7 +122,7 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), p
       it: fmt('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }),
     },
     edition: `${config.location.label} Edition`,
-    printed: fmt('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }, printedAt).replace(/\s/g, ' ').toLowerCase(),
+    printed: fmt('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, ' ').toLowerCase(),
     weather: {
       mood,
       icon,

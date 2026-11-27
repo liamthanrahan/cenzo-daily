@@ -198,35 +198,17 @@
           </figure>
 
           <div class="w-now">
-            <svg id="sky-icon" viewBox="0 0 48 48" aria-hidden="true" fill="#fff" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <g data-icons="sun">
-                <circle cx="24" cy="24" r="8"/>
-                <path d="M24 6v5M24 37v5M6 24h5M37 24h5M11 11l3.5 3.5M33.5 33.5L37 37M11 37l3.5-3.5M33.5 14.5L37 11"/>
-              </g>
-              <g data-icons="partly">
-                <circle cx="18" cy="17" r="7"/>
-                <path d="M18 3v4M4 17h4M8 7l3 3M28 7l-3 3"/>
-                <path d="M16 40H38a7 7 0 0 0-1-14 10 10 0 0 0-19 2 6 6 0 0 0-2 12z"/>
-              </g>
-              <g data-icons="cloud">
-                <path d="M12 36H36a8 8 0 0 0-1-16 12 12 0 0 0-22 3 7 7 0 0 0-1 13z"/>
-              </g>
-              <g data-icons="fog" fill="none">
-                <path d="M8 16h32M4 24h40M8 32h32M14 40h20"/>
-              </g>
-              <g data-icons="rain">
-                <path d="M12 28H36a8 8 0 0 0-1-16 12 12 0 0 0-22 3 7 7 0 0 0-1 13z"/>
-                <path d="M16 34l-2 6M24 34l-2 6M32 34l-2 6" fill="none"/>
-              </g>
-              <g data-icons="storm">
-                <path d="M12 28H36a8 8 0 0 0-1-16 12 12 0 0 0-22 3 7 7 0 0 0-1 13z"/>
-                <path d="M26 30l-6 9h7l-4 8" fill="none"/>
-              </g>
-              <g data-icons="snow">
-                <path d="M12 28H36a8 8 0 0 0-1-16 12 12 0 0 0-22 3 7 7 0 0 0-1 13z"/>
-                <path d="M16 36v6M13 39h6M30 36v6M27 39h6" fill="none"/>
-              </g>
-            </svg>
+            <!-- Sky icons: glyphs from the Weather Icons font by Erik Flowers (SIL OFL 1.1).
+                 render.js shows the one whose data-icons matches today's sky. -->
+            <div id="sky-icon" aria-hidden="true">
+              <span data-icons="sun">&#xf00d;</span>
+              <span data-icons="partly">&#xf002;</span>
+              <span data-icons="cloud">&#xf013;</span>
+              <span data-icons="fog">&#xf014;</span>
+              <span data-icons="rain">&#xf019;</span>
+              <span data-icons="storm">&#xf01e;</span>
+              <span data-icons="snow">&#xf01b;</span>
+            </div>
             <div class="temp"><span id="t-max">–</span><span class="deg">°</span></div>
             <div class="tmin">min <span id="t-min">–</span>°</div>
             <div class="cond" id="cond-en">–</div>
