@@ -144,3 +144,25 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), p
     fact: { ...fact, title: smartQuotes(fact.title), text: smartQuotes(fact.text), number: factIndex + 1, total: facts.length },
   };
 }
+
+// If there's no artwork for today's mood, borrow a close one before falling back to the drawn SVG.
+const AVATAR_FALLBACKS = {
+  sunny: ['hot', 'partly'],
+  partly: ['sunny', 'cloudy'],
+  cloudy: ['partly', 'fog'],
+  fog: ['cloudy'],
+  rain: ['storm'],
+  storm: ['rain'],
+  snow: ['cold'],
+  hot: ['sunny'],
+  cold: ['snow'],
+  windy: ['cloudy', 'partly'],
+  unknown: ['cloudy', 'partly'],
+};
+// `artwork` is the set of moods that have an image in avatars/.
+export function withAvatar(content, artwork) {
+  const mood = content.weather.mood;
+  const pick = [mood, ...(AVATAR_FALLBACKS[mood] ?? [])].find((m) => artwork.has(m));
+  content.weather.avatarImage = pick ? `avatars/${pick}.png` : null;
+  return content;
+}

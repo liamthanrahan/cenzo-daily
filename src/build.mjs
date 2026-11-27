@@ -11,7 +11,8 @@ import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import { getWeather } from './weather.mjs';
-import { buildContent } from './content.mjs';
+import { buildContent, withAvatar } from './content.mjs';
+import { localDate } from './forecast.mjs';
 import { prepareAvatars } from './prepare-avatars.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -43,25 +44,38 @@ const args = Object.fromEntries(
   }),
 );
 
-// If there's no artwork for today's mood, borrow a close one before falling back to the drawn SVG.
-const AVATAR_FALLBACKS = {
-  sunny: ['hot', 'partly'],
-  partly: ['sunny', 'cloudy'],
-  cloudy: ['partly', 'fog'],
-  fog: ['cloudy'],
-  rain: ['storm'],
-  storm: ['rain'],
-  snow: ['cold'],
-  hot: ['sunny'],
-  cold: ['snow'],
-  windy: ['cloudy', 'partly'],
-  unknown: ['cloudy', 'partly'],
-};
-function withAvatar(content, artwork) {
-  const mood = content.weather.mood;
-  const pick = [mood, ...(AVATAR_FALLBACKS[mood] ?? [])].find((m) => artwork.has(m));
-  content.weather.avatarImage = pick ? `avatars/${pick}.png` : null;
-  return content;
+// The live page (out/live/): the same front page, but drawn in the browser each time it's
+// loaded, with that moment's date and forecast. See src/live.mjs.
+async function publishLivePage({ config, facts, copy, artwork }) {
+  const dir = path.join(OUT, 'live');
+  await mkdir(path.join(dir, 'fonts'), { recursive: true });
+
+  // Fonts: point the stylesheet at copies next to it instead of node_modules.
+  const fonts = [];
+  const css = (await readFile(path.join(ROOT, 'template/style.css'), 'utf8')).replace(
+    /url\('(\.\.\/node_modules\/[^']+\/([^'/]+\.woff2))'\)/g,
+    (_, rel, file) => { fonts.push([rel, file]); return `url('fonts/${file}')`; },
+  );
+  for (const [rel, file] of fonts) await cp(path.join(ROOT, 'template', rel), path.join(dir, 'fonts', file));
+  await writeFile(path.join(dir, 'style.css'), css);
+
+  // The template, minus the sample data, plus the script that fills it in.
+  const swaps = [
+    ['<script src="sample-data.js"></script>', '<script>window.__EXTERNAL_DATA__ = true;</script>'],
+    ['<script src="render.js" defer></script>', '<script src="render.js" defer></script>\n  <script type="module" src="live.mjs"></script>'],
+  ];
+  let html = await readFile(path.join(ROOT, 'template/index.html'), 'utf8');
+  for (const [from, to] of swaps) {
+    if (!html.includes(from)) throw new Error(`template/index.html no longer has ${from}`);
+    html = html.replace(from, to);
+  }
+  await writeFile(path.join(dir, 'index.html'), html);
+
+  await cp(path.join(ROOT, 'template/render.js'), path.join(dir, 'render.js'));
+  for (const file of ['live.mjs', 'content.mjs', 'forecast.mjs']) await cp(path.join(ROOT, 'src', file), path.join(dir, file));
+  await mkdir(path.join(dir, 'avatars'), { recursive: true });
+  for (const mood of artwork) await cp(path.join(ROOT, 'template/avatars', `${mood}.png`), path.join(dir, 'avatars', `${mood}.png`));
+  await writeFile(path.join(dir, 'paper.json'), JSON.stringify({ config, facts, copy, artwork: [...artwork] }));
 }
 
 const readJson = async (rel) => JSON.parse(await readFile(path.join(ROOT, rel), 'utf8'));
@@ -118,10 +132,6 @@ const NEXT_DAY_FROM_HOUR = 18;
 const localHour = (date, timeZone) =>
   Number(new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', hourCycle: 'h23' }).format(date));
 
-// "2026-11-28" in the given time zone
-const localDate = (date, timeZone) =>
-  new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
-
 async function main() {
   const config = await readJson('config.json');
   const facts = await readJson('data/italy-facts.json');
@@ -170,6 +180,7 @@ async function main() {
 <body style="margin:0;display:grid;place-items:center;min-height:100vh;background:#ddd">
 <img src="dashboard.png" width="800" height="480" alt="${content.masthead}, ${content.date.en}" style="box-shadow:0 4px 24px #0003">`,
     );
+    await publishLivePage({ config, facts, copy, artwork });
     // Extra pages published as they are, e.g. static/render-test.html
     await cp(path.join(ROOT, 'static'), OUT, { recursive: true }).catch((err) => {
       if (err.code !== 'ENOENT') throw err;

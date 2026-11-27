@@ -20,9 +20,16 @@ GitHub Actions (every morning)
         /dashboard.png   ← the device downloads this
         /data.json       ← the same content as data, if you'd rather draw it on-device
         /index.html      ← preview in a browser
+        /live/           ← the live page (see below)
 ```
 
 The display only has to wake up, download one PNG, show it and go back to sleep. All the logic lives here, so changing the paper never means reflashing the device.
+
+### The live page
+
+`/live/` is the same front page, drawn in the browser each time it's loaded: it works out today's date in Sydney time, fetches the forecast and fills the template with the same code the build uses (`src/live.mjs`, `src/content.mjs`, `src/forecast.mjs`). Point Seeedash's HTML widget at it and every refresh shows that moment's paper, so it doesn't depend on when GitHub runs the scheduled build.
+
+If the forecast can't be fetched, it prints with the weather desk "out to lunch". If the page can't load its data at all, it shows the last printed `dashboard.png` with a small note saying why.
 
 ## Make it yours
 
