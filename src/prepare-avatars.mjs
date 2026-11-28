@@ -25,7 +25,7 @@ export async function prepareAvatars() {
   try {
     files = (await readdir(SRC)).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
   } catch {
-    return []; // no avatars/source folder: the drawn SVG avatar is used
+    return []; // no avatars/source folder: no avatar is shown
   }
   let crops = {};
   try { crops = JSON.parse(await readFile(path.join(ROOT, 'avatars/crops.json'), 'utf8')); } catch {}

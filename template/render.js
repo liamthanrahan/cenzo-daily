@@ -5,6 +5,7 @@ window.render = function render(d) {
   const set = (id, text) => { document.getElementById(id).textContent = text ?? '–'; };
   const w = d.weather;
 
+  document.documentElement.classList.add('rendered');
   document.body.classList.toggle('no-weather', !d.weather.available);
   set('masthead', d.masthead);
   document.title = d.masthead;
@@ -31,21 +32,14 @@ window.render = function render(d) {
   set('printed', `Stampato alle ${d.printed}`);
   set('f-number', `Storia ${d.fact.number} di ${d.fact.total}`);
 
-  // Show only the avatar pieces and sky icon for today's weather.
-  document.querySelectorAll('[data-moods]').forEach((el) => {
-    el.style.display = el.dataset.moods.split(' ').includes(w.mood) ? '' : 'none';
-  });
-  document.querySelectorAll('[data-hide-moods]').forEach((el) => {
-    el.style.display = el.dataset.hideMoods.split(' ').includes(w.mood) ? 'none' : '';
-  });
+  // Show only the sky icon for today's weather.
   document.querySelectorAll('[data-icons]').forEach((el) => {
     el.style.display = el.dataset.icons === w.icon ? '' : 'none';
   });
 
-  // Use artwork for the avatar if the build found some, otherwise the drawn SVG.
+  // The avatar artwork for today's weather (none at all only if avatars/source/ is empty).
   const img = document.getElementById('avatar-img');
   img.hidden = !w.avatarImage;
-  document.getElementById('avatar').style.display = w.avatarImage ? 'none' : ''; // SVG ignores .hidden
   if (w.avatarImage) img.src = w.avatarImage;
 
   // Shrink text until it fits its box, so long headlines and stories never overflow.

@@ -115,7 +115,7 @@ html, body { width: 800px; height: 480px; overflow: hidden; background: var(--pa
   margin-top: 6px;
 }
 .photo { width: 138px; flex: none; }
-#avatar, #avatar-img {
+#avatar-img {
   display: block;
   width: 138px;
   height: 146px;
@@ -124,6 +124,15 @@ html, body { width: 800px; height: 480px; overflow: hidden; background: var(--pa
 }
 #avatar-img { image-rendering: pixelated; }
 #avatar-img[hidden] { display: none; }
+
+/* Until render.js has filled the page in, show just the masthead and a "going to press" line,
+   not the template's placeholders. (visibility, not display, so the fonts still load.) */
+html:not(.rendered) .dateline > *,
+html:not(.rendered) .columns,
+html:not(.rendered) .footer { visibility: hidden; }
+.loading { position: absolute; left: 0; right: 0; top: 210px; text-align: center; font: 26px/1.3 'Body', Georgia, serif; }
+.loading em { display: block; font-size: 20px; }
+html.rendered .loading { display: none; }
 .photo figcaption {
   font-style: italic;
   font-size: 11px;

@@ -144,7 +144,8 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), m
   };
 }
 
-// If there's no artwork for today's mood, borrow a close one before falling back to the drawn SVG.
+// If there's no artwork for today's mood, borrow a close one, then the default, then any at all.
+const DEFAULT_AVATAR = 'cloudy';
 const AVATAR_FALLBACKS = {
   sunny: ['hot', 'partly'],
   partly: ['sunny', 'cloudy'],
@@ -161,7 +162,7 @@ const AVATAR_FALLBACKS = {
 // `artwork` is the set of moods that have an image in avatars/.
 export function withAvatar(content, artwork) {
   const mood = content.weather.mood;
-  const pick = [mood, ...(AVATAR_FALLBACKS[mood] ?? [])].find((m) => artwork.has(m));
+  const pick = [mood, ...(AVATAR_FALLBACKS[mood] ?? []), DEFAULT_AVATAR, ...artwork].find((m) => artwork.has(m));
   content.weather.avatarImage = pick ? `avatars/${pick}.png` : null;
   return content;
 }

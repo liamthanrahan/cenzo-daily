@@ -38,6 +38,7 @@ async function main() {
 async function showDelayed(err) {
   const now = new Date();
   const fmt = (locale, opts) => new Intl.DateTimeFormat(locale, { timeZone, ...opts }).format(now);
+  document.documentElement.classList.add('rendered');
   document.getElementById('issue').textContent = 'Edizione in ritardo';
   document.getElementById('date-en').textContent = fmt('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById('date-it').textContent = fmt('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });

@@ -38,7 +38,6 @@ GitHub Actions publishes the site to GitHub Pages whenever `main` changes:
 | Location, name, masthead, first issue date | `config.json` |
 | Layout, fonts, sizes | `template/index.html`, `template/style.css` |
 | The avatar artwork | `avatars/source/<mood>.jpg` (see below) |
-| The drawn fallback avatar | the `<g id="person">` group in `template/index.html` |
 | Weather icons | the `#sky-icon` glyphs in `template/index.html` ([Weather Icons](https://erikflowers.github.io/weather-icons/) font) |
 | What makes it "hot", "cold" or "windy" | `thresholds` in `config.json` |
 | Weather headlines and photo captions | `data/weather-copy.json` |
@@ -46,9 +45,9 @@ GitHub Actions publishes the site to GitHub Pages whenever `main` changes:
 
 **Stories** are shown in order, one per issue, looping when they run out. Write plain `'` and `"`; they're converted to curly quotes when printed. Long stories shrink to fit, but around 200–290 characters looks best.
 
-**Avatar artwork:** drop a square image named after a mood (`sunny.jpg`, `rain.png`, ...) into `avatars/source/`. Each build crops it in on the face, converts it to the 4 greys and uses it on that mood's days. Keep the face centred and props close to the head, because the outer edges get cropped. Adjust the framing per mood in `avatars/crops.json` (`{"rain": {"zoom": 0.8, "top": 0.3}}`). Missing moods borrow a close one (cold uses snow, hot uses sunny), and fall back to the drawn SVG if there's nothing close.
+**Avatar artwork:** drop a square image named after a mood (`sunny.jpg`, `rain.png`, ...) into `avatars/source/`. Each build crops it in on the face, converts it to the 4 greys and uses it on that mood's days. Keep the face centred and props close to the head, because the outer edges get cropped. Adjust the framing per mood in `avatars/crops.json` (`{"rain": {"zoom": 0.8, "top": 0.3}}`). Missing moods borrow a close one (cold uses snow, hot uses sunny), and otherwise the paper uses `cloudy`.
 
-**Avatar moods** are `sunny partly cloudy fog rain storm snow hot cold windy unknown`. Any SVG element with `data-moods="rain storm"` only appears in those moods, and `data-hide-moods` does the opposite. Mood picking is in `pickMood()` in `src/content.mjs`.
+**Avatar moods** are `sunny partly cloudy fog rain storm snow hot cold windy unknown`. Mood picking is in `pickMood()` in `src/content.mjs`.
 
 **Colours:** stick to `#000`, `#555`, `#aaa` and `#fff`. The panel can only show those four, and anything else is rounded to the nearest one.
 
