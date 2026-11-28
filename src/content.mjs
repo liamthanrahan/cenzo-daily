@@ -191,6 +191,7 @@ export function buildContent({ config, weather, tonight = null, facts, words = [
     fact: { ...fact, title: smartQuotes(fact.title), text: smartQuotes(fact.text), number: factIndex + 1, total: facts.length },
     word: word && {
       ...word,
+      meaning: smartQuotes(word.meaning),
       it: smartQuotes(word.it),
       en: smartQuotes(word.en),
       note: word.note ? smartQuotes(word.note) : null,
