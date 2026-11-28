@@ -163,9 +163,11 @@ async function main() {
     await writeFile(path.join(OUT, 'data.json'), JSON.stringify({ generatedAt: new Date().toISOString(), ...content }, null, 2));
     await writeFile(
       path.join(OUT, 'index.html'),
+      // The site's front page: the live paper (live/), centred for viewing in a browser. The
+      // device loads live/ itself, which stays pinned at 800 × 480 for Seeed's renderer.
       `<!doctype html><meta charset="utf-8"><title>${content.masthead}</title>
 <body style="margin:0;display:grid;place-items:center;min-height:100vh;background:#ddd">
-<img src="dashboard.png" width="800" height="480" alt="${content.masthead}, ${content.date.en}" style="box-shadow:0 4px 24px #0003">`,
+<iframe src="live/" width="800" height="480" title="${content.masthead}, today's front page" scrolling="no" style="border:0;display:block;background:#fff;box-shadow:0 4px 24px #0003"></iframe>`,
     );
     await publishLivePage({ config, facts, copy, artwork });
     console.log(`Printed ${content.issue.label}: "${content.weather.headline}" / "${content.fact.title}"`);

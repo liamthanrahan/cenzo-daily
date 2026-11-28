@@ -26,7 +26,7 @@ GitHub Actions publishes the site to GitHub Pages whenever `main` changes:
 /live/           ← the live page: point the device here
 /dashboard.png   ← the paper as printed at publish time, snapped to the panel's 4 greys
 /data.json       ← the same content as data
-/index.html      ← dashboard.png in a browser
+/index.html      ← the live page, centred for viewing in a browser
 ```
 
 `dashboard.png` is printed by screenshotting the same template in headless Chrome. It's handy for previews, or for firmware that can only show an image, but it only changes when the site is published.
