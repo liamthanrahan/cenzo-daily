@@ -114,7 +114,7 @@ async function renderPage(browser, content) {
   await page.evaluateOnNewDocument(() => { window.__EXTERNAL_DATA__ = true; });
   await page.goto(pathToFileURL(path.join(ROOT, 'template/index.html')).href, { waitUntil: 'load' });
   await page.evaluate(async (data) => {
-    await document.fonts.ready;
+    await Promise.all([...document.fonts].map((f) => f.load().catch(() => {})));
     window.render(data);
   }, content);
   await page.evaluate(async () => {

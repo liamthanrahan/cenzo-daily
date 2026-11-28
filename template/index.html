@@ -17,27 +17,26 @@
       <div class="ear right"><span class="ear-k">Prezzo</span><span class="ear-v">un espresso</span></div>
     </header>
 
+    <!-- Anything that changes day to day is left empty here; render.js fills it in. Until then the
+         page shows only the parts that never change (see "While the page loads" in style.css). -->
     <div class="dateline">
-      <span id="issue">Vol. I · No. 1</span>
+      <span id="issue"></span>
       <span class="dateline-date"><span id="date-en"></span> <span class="sep">·</span> <em id="date-it"></em></span>
       <span id="edition"></span>
     </div>
-
-    <!-- Shown only until the page has been filled in (see .loading in style.css) -->
-    <div class="loading">In stampa… <em>Going to press…</em></div>
 
     <div class="columns">
 
       <!-- ===================== WEATHER ===================== -->
       <section class="weather">
         <div class="kicker">Il Meteo <span>· Weather</span></div>
-        <h2 id="w-head" class="fit"><span id="w-headline">Headline</span></h2>
+        <h2 id="w-head" class="fit"><span id="w-headline"></span></h2>
 
         <div class="w-main">
           <figure class="photo">
             <!-- Avatar: artwork from avatars/source/, picked for today's weather (withAvatar in src/content.mjs) -->
-            <img id="avatar-img" src="avatars/cloudy.png" alt="" width="138" height="146">
-            <figcaption id="w-caption">Caption</figcaption>
+            <img id="avatar-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="" width="138" height="146">
+            <figcaption id="w-caption"></figcaption>
           </figure>
 
           <div class="w-now">
@@ -52,21 +51,21 @@
               <span data-icons="storm">&#xf01e;</span>
               <span data-icons="snow">&#xf01b;</span>
             </div>
-            <div class="temp"><span id="t-max">–</span><span class="deg">°</span></div>
-            <div class="tmin">min <span id="t-min">–</span>°</div>
-            <div class="cond" id="cond-en">–</div>
-            <div class="cond-it" id="cond-it">–</div>
+            <div class="temp"><span id="t-max"></span><span class="deg">°</span></div>
+            <div class="tmin">min <span id="t-min"></span>°</div>
+            <div class="cond" id="cond-en"></div>
+            <div class="cond-it" id="cond-it"></div>
           </div>
         </div>
 
         <table class="stats">
           <tr>
-            <td><span class="label">Pioggia</span><span class="label-en">Rain</span><b id="s-rain">–</b></td>
-            <td><span class="label">Indice UV</span><b id="s-uv">–</b> <i id="s-uv-band"></i></td>
+            <td><span class="label">Pioggia</span><span class="label-en">Rain</span><b id="s-rain"></b></td>
+            <td><span class="label">Indice UV</span><b id="s-uv"></b> <i id="s-uv-band"></i></td>
           </tr>
           <tr>
-            <td><span class="label">Alba</span><span class="label-en">Sunrise</span><b id="s-sunrise">–</b></td>
-            <td><span class="label">Tramonto</span><span class="label-en">Sunset</span><b id="s-sunset">–</b></td>
+            <td><span class="label">Alba</span><span class="label-en">Sunrise</span><b id="s-sunrise"></b></td>
+            <td><span class="label">Tramonto</span><span class="label-en">Sunset</span><b id="s-sunset"></b></td>
           </tr>
         </table>
       </section>
@@ -74,17 +73,20 @@
       <!-- ===================== STORY ===================== -->
       <section class="story">
         <div class="kicker">Dagli Archivi <span>· From the Archives</span></div>
-        <h2 id="f-head" class="fit"><span id="f-title">Title</span></h2>
-        <div class="story-dateline" id="f-dateline">Rome · 753 BC</div>
+        <h2 id="f-head" class="fit"><span id="f-title"></span></h2>
+        <div class="story-dateline" id="f-dateline">&nbsp;</div>
         <div class="story-body fit" id="f-body"><p id="f-text"></p></div>
       </section>
     </div>
 
     <footer class="footer">
       <span>Previsioni: Open-Meteo</span>
-      <span id="printed">Stampato alle 5:30 am</span>
-      <span id="f-number">Storia 1 di 110</span>
+      <span id="printed"></span>
+      <span id="f-number"></span>
     </footer>
   </main>
+
+  <!-- Rubber stamp shown only while the page loads (see .stamp in style.css) -->
+  <div class="stamp" aria-hidden="true"><div class="stamp-ink">Printing<br>in progress</div></div>
 </body>
 </html>

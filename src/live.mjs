@@ -25,7 +25,8 @@ async function main() {
   });
   const content = withAvatar(buildContent({ config, weather, facts, copy, now }), new Set(artwork));
 
-  await document.fonts.ready;
+  // Load every font face first: the day's text (and the icon) only appears once render() runs.
+  await Promise.all([...document.fonts].map((f) => f.load().catch(() => {})));
   window.render(content);
   const img = document.getElementById('avatar-img');
   if (!img.hidden) await img.decode().catch(() => {});

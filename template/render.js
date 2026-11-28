@@ -64,5 +64,7 @@ function fit(el, max, min) {
 }
 
 if (!window.__EXTERNAL_DATA__) {
-  document.addEventListener('DOMContentLoaded', () => document.fonts.ready.then(() => window.render(window.SAMPLE_DATA)));
+  document.addEventListener('DOMContentLoaded', () =>
+    Promise.all([...document.fonts].map((f) => f.load().catch(() => {}))).then(() => window.render(window.SAMPLE_DATA)),
+  );
 }

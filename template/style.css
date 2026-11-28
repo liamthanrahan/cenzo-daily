@@ -125,14 +125,42 @@ html, body { width: 800px; height: 480px; overflow: hidden; background: var(--pa
 #avatar-img { image-rendering: pixelated; }
 #avatar-img[hidden] { display: none; }
 
-/* Until render.js has filled the page in, show just the masthead and a "going to press" line,
-   not the template's placeholders. (visibility, not display, so the fonts still load.) */
-html:not(.rendered) .dateline > *,
-html:not(.rendered) .columns,
-html:not(.rendered) .footer { visibility: hidden; }
-.loading { position: absolute; left: 0; right: 0; top: 210px; text-align: center; font: 26px/1.3 'Body', Georgia, serif; }
-.loading em { display: block; font-size: 20px; }
-html.rendered .loading { display: none; }
+/* While the page loads (before render.js), show only what never changes: the masthead, section
+   headings, labels and rules. The day's text is empty in the template; these hide the rest. */
+html:not(.rendered) #sky-icon [data-icons],
+html:not(.rendered) .dateline .sep,
+html:not(.rendered) .deg,
+html:not(.rendered) .tmin { visibility: hidden; }
+/* Empty stats still take a line, so the rows sit where they will once filled in. */
+.stats b:empty::before { content: '\00a0'; }
+/* The rule between the story columns only appears once there's text in both; draw it meanwhile. */
+html:not(.rendered) .story-body { background: linear-gradient(var(--ink), var(--ink)) center / 1px 100% no-repeat; }
+
+/* A rubber stamp across the page while it loads. .stamp is a plain paper backing, so the page's
+   rules don't show through; .stamp-ink on top has small specks knocked out, like a worn stamp. */
+.stamp {
+  position: absolute;
+  left: 50%;
+  top: 280px;
+  transform: translate(-50%, -50%) rotate(-7deg);
+  border-radius: 12px;
+  background: var(--paper);
+}
+.stamp-ink {
+  padding: 12px 28px 10px;
+  border: 5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 5px var(--ink);
+  font: 700 38px/1.1 'Headline', Georgia, serif;
+  text-align: center;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -16 10.4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -16 10.4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.rendered .stamp { display: none; }
 .photo figcaption {
   font-style: italic;
   font-size: 11px;
