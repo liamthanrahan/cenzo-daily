@@ -20,6 +20,14 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body { width: 800px; height: 480px; overflow: hidden; background: var(--paper); color: var(--ink); }
+body { position: relative; } /* the stamp is placed within the page */
+
+/* In a browser window bigger than the panel, show the page centred on grey. The device's
+   renderer draws it at exactly 800 × 480, so this never applies there. */
+@media (min-width: 801px), (min-height: 481px) {
+  html { width: auto; height: auto; min-height: 100vh; overflow: auto; background: #ddd; display: grid; place-items: center; }
+  body { box-shadow: 0 4px 24px #0003; }
+}
 
 .page {
   width: 800px;

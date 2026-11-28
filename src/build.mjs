@@ -1,6 +1,6 @@
 // Builds the current edition of the front page.
 //
-//   npm run build            live weather -> out/dashboard.png, out/data.json, out/index.html
+//   npm run build            live weather -> out/dashboard.png, out/data.json, and the live page (out/index.html)
 //   npm run sample           same, using fixtures/open-meteo-sample.json (no network)
 //   npm run gallery          one image per avatar mood -> out/gallery/*.png
 //
@@ -43,10 +43,11 @@ const args = Object.fromEntries(
   }),
 );
 
-// The live page (out/live/): the same front page, but drawn in the browser each time it's
-// loaded, with that moment's date and forecast. See src/live.mjs.
+// The live page, published as the site's front page (out/index.html and the files beside it):
+// the same front page, drawn in the browser each time it's loaded with that moment's edition
+// and forecast. See src/live.mjs.
 async function publishLivePage({ config, facts, words, copy, artwork }) {
-  const dir = path.join(OUT, 'live');
+  const dir = OUT;
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
 
   // Fonts: point the stylesheet at copies next to it instead of node_modules.
@@ -165,14 +166,6 @@ async function main() {
     const content = withAvatar(buildContent({ config, weather, tonight, facts, words, copy, now, edition, moodOverride: args.mood }), artwork);
     await writeFile(path.join(OUT, 'dashboard.png'), await renderPage(browser, content));
     await writeFile(path.join(OUT, 'data.json'), JSON.stringify({ generatedAt: new Date().toISOString(), ...content }, null, 2));
-    await writeFile(
-      path.join(OUT, 'index.html'),
-      // The site's front page: the live paper (live/), centred for viewing in a browser. The
-      // device loads live/ itself, which stays pinned at 800 × 480 for Seeed's renderer.
-      `<!doctype html><meta charset="utf-8"><title>${content.masthead}</title>
-<body style="margin:0;display:grid;place-items:center;min-height:100vh;background:#ddd">
-<iframe src="live/" width="800" height="480" title="${content.masthead}, today's front page" scrolling="no" style="border:0;display:block;background:#fff;box-shadow:0 4px 24px #0003"></iframe>`,
-    );
     await publishLivePage({ config, facts, words, copy, artwork });
     const feature = content.word ? `word "${content.word.word}"` : `"${content.fact.title}"`;
     console.log(`Printed ${content.issue.label}, ${content.edition.en}: "${content.weather.headline}" / ${feature}`);

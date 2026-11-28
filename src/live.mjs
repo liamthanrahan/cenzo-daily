@@ -2,7 +2,7 @@
 // each time Seeedash refreshes it): works out today's date in Sydney, fetches the forecast
 // and draws the paper with the same code the build uses for dashboard.png.
 //
-// The build copies this file, content.mjs, forecast.mjs and the template into out/live/,
+// The build publishes this file, content.mjs, forecast.mjs and the template as the site's front page,
 // plus paper.json (config, stories, words, weather copy and which avatar moods have artwork).
 import { buildContent, editionAt, weatherForEdition, withAvatar } from './content.mjs';
 import { fetchForecast } from './forecast.mjs';

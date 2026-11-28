@@ -10,7 +10,7 @@ Each issue has:
 
 ## How it works
 
-The device shows a web page, `/live/`, through Seeedash's HTML widget. Seeed's servers load the page at every refresh and send the device a picture of it. Each time it's loaded, the page:
+The device shows the site's front page through Seeedash's HTML widget. Seeed's servers load the page at every refresh and send the device a picture of it. Each time it's loaded, the page:
 
 1. works out which edition is current, in Sydney time (whatever time zone the renderer is in)
 2. fetches the forecast from Open-Meteo (free, no API key)
@@ -30,10 +30,9 @@ If the forecast can't be fetched, the paper still prints, with the weather desk 
 GitHub Actions publishes the site to GitHub Pages whenever `main` changes:
 
 ```
-/live/           ← the live page: point the device here
+/                ← the live page: point the device here (centred on grey in a bigger browser window)
 /dashboard.png   ← the paper as printed at publish time, snapped to the panel's 4 greys
 /data.json       ← the same content as data
-/index.html      ← the live page, centred for viewing in a browser
 ```
 
 `dashboard.png` is printed by screenshotting the same template in headless Chrome. It's handy for previews, or for firmware that can only show an image, but it only changes when the site is published.
@@ -81,7 +80,7 @@ Extra flags: `--date=2027-01-01` prints a given day, `--edition=evening` prints 
 1. Push to GitHub.
 2. In **Settings → Pages**, set **Source** to **GitHub Actions**.
 3. Run the **Publish the paper** workflow once by hand from the **Actions** tab (later pushes to `main` publish automatically).
-4. The live page is now at `https://<user>.github.io/<repo>/live/`.
+4. The live page is now at `https://<user>.github.io/<repo>/`.
 
 **GitHub Pages is public**, even if the repo is private. Keep the location in `config.json` to suburb level (two decimal places is about 1 km), and remember the avatar is public too.
 
@@ -89,7 +88,7 @@ Extra flags: `--date=2027-01-01` prints a given day, `--edition=evening` prints 
 
 Built for the Seeed Studio **reTerminal E1001** (ESP32-S3, 7.5" 800 × 480, 4-grey ePaper), running Seeed's stock firmware:
 
-1. In Seeedash, add an **HTML** widget to the canvas, set its URL to `https://<user>.github.io/<repo>/live/` and apply the design to the device.
+1. In Seeedash, add an **HTML** widget to the canvas, set its URL to `https://<user>.github.io/<repo>/` and apply the design to the device.
 2. Set the device's **Interval** (we use 6 hours). Each refresh, Seeed loads the page, waits for it and sends the device a picture; pressing the device's refresh button does the same straight away.
 3. Choose the **4-Level Grayscale** option. The page only uses `#000`, `#555`, `#aaa` and `#fff`, the panel's four shades.
 
