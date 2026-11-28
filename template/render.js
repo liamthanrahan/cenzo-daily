@@ -5,17 +5,19 @@ window.render = function render(d) {
   const set = (id, text) => { document.getElementById(id).textContent = text ?? '–'; };
   const w = d.weather;
 
-  document.documentElement.classList.add('rendered');
+  const root = document.documentElement;
+  root.classList.add('rendered');
+  root.classList.toggle('edition-morning', d.edition.key === 'morning');
+  root.classList.toggle('edition-evening', d.edition.key === 'evening');
   document.body.classList.toggle('no-weather', !d.weather.available);
   set('masthead', d.masthead);
   document.title = d.masthead;
   set('issue', d.issue.label);
   set('date-en', d.date.en);
   set('date-it', d.date.it);
-  set('edition', d.edition);
+  set('edition', d.edition.label);
 
   set('w-headline', w.headline);
-  set('w-caption', w.caption);
   set('t-max', w.max);
   set('t-min', w.min);
   set('cond-en', w.conditionEn);
@@ -25,12 +27,23 @@ window.render = function render(d) {
   set('s-uv-band', w.uvIt);
   set('s-sunrise', w.sunrise);
   set('s-sunset', w.sunset);
+  set('s-tonight', `${w.tonightLow ?? '–'}° · ${w.tonightRain != null ? `${w.tonightRain}%` : '–'}`);
 
   set('f-title', d.fact.title);
   set('f-dateline', `${d.fact.place} · ${d.fact.era}`);
   set('f-text', d.fact.text);
   set('printed', `Stampato alle ${d.printed}`);
-  set('f-number', `Storia ${d.fact.number} di ${d.fact.total}`);
+  set('f-number', d.word ? `Parola ${d.word.number} di ${d.word.total}` : `Storia ${d.fact.number} di ${d.fact.total}`);
+
+  // Evening edition: the word of the day.
+  if (d.word) {
+    set('p-word', d.word.word);
+    set('p-dateline', `${d.word.say} · ${d.word.type}`);
+    set('p-meaning', d.word.meaning);
+    set('p-it', d.word.it);
+    set('p-en', d.word.en);
+    document.getElementById('p-note').textContent = d.word.note ?? '';
+  }
 
   // Show only the sky icon for today's weather.
   document.querySelectorAll('[data-icons]').forEach((el) => {
@@ -47,6 +60,8 @@ window.render = function render(d) {
     headline: fit(document.getElementById('w-head'), 24, 16),
     title: fit(document.getElementById('f-head'), 32, 20),
     body: fit(document.getElementById('f-body'), 21, 13),
+    word: d.word && fit(document.getElementById('p-head'), 44, 26),
+    wordBody: d.word && fit(document.getElementById('p-body'), 27, 13),
   };
 };
 

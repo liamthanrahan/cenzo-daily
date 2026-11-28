@@ -3,9 +3,9 @@
 // and draws the paper with the same code the build uses for dashboard.png.
 //
 // The build copies this file, content.mjs, forecast.mjs and the template into out/live/,
-// plus paper.json (config, stories, weather copy and which avatar moods have artwork).
-import { buildContent, withAvatar } from './content.mjs';
-import { fetchForecast, localDate } from './forecast.mjs';
+// plus paper.json (config, stories, words, weather copy and which avatar moods have artwork).
+import { buildContent, editionAt, weatherForEdition, withAvatar } from './content.mjs';
+import { fetchForecast } from './forecast.mjs';
 
 // Used for the "delayed" notice if paper.json (which holds the real setting) didn't load.
 let timeZone = 'Australia/Sydney';
@@ -13,17 +13,15 @@ let timeZone = 'Australia/Sydney';
 async function main() {
   const res = await fetch('paper.json', { cache: 'no-cache' });
   if (!res.ok) throw new Error(`paper.json: ${res.status}`);
-  const { config, facts, copy, artwork } = await res.json();
+  const { config, facts, words, copy, artwork } = await res.json();
   timeZone = config.location.timezone;
 
   const now = new Date();
+  const edition = editionAt(now, timeZone);
   // Kept short: the renderer takes its picture after about 30 seconds.
-  const weather = await fetchForecast(config.location, localDate(now, timeZone), {
-    attempts: 2,
-    timeoutMs: 8000,
-    pauseMs: 1000,
-  });
-  const content = withAvatar(buildContent({ config, weather, facts, copy, now }), new Set(artwork));
+  const raw = await fetchForecast(config.location, { attempts: 2, timeoutMs: 8000, pauseMs: 1000 });
+  const { weather, tonight } = weatherForEdition(raw, edition);
+  const content = withAvatar(buildContent({ config, weather, tonight, facts, words, copy, now, edition }), new Set(artwork));
 
   // Load every font face first: the day's text (and the icon) only appears once render() runs.
   await Promise.all([...document.fonts].map((f) => f.load().catch(() => {})));

@@ -1,18 +1,17 @@
-// Builds today's front page.
+// Builds the current edition of the front page.
 //
 //   npm run build            live weather -> out/dashboard.png, out/data.json, out/index.html
 //   npm run sample           same, using fixtures/open-meteo-sample.json (no network)
 //   npm run gallery          one image per avatar mood -> out/gallery/*.png
 //
-// Options: --sample, --gallery, --mood=<mood>, --date=YYYY-MM-DD
+// Options: --sample, --gallery, --mood=<mood>, --date=YYYY-MM-DD, --edition=morning|evening
 import { mkdir, readFile, writeFile, access, cp } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import sharp from 'sharp';
 import { getWeather } from './weather.mjs';
-import { buildContent, withAvatar } from './content.mjs';
-import { localDate } from './forecast.mjs';
+import { buildContent, editionAt, weatherForEdition, withAvatar } from './content.mjs';
 import { prepareAvatars } from './prepare-avatars.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -46,7 +45,7 @@ const args = Object.fromEntries(
 
 // The live page (out/live/): the same front page, but drawn in the browser each time it's
 // loaded, with that moment's date and forecast. See src/live.mjs.
-async function publishLivePage({ config, facts, copy, artwork }) {
+async function publishLivePage({ config, facts, words, copy, artwork }) {
   const dir = path.join(OUT, 'live');
   await mkdir(path.join(dir, 'fonts'), { recursive: true });
 
@@ -75,7 +74,7 @@ async function publishLivePage({ config, facts, copy, artwork }) {
   for (const file of ['live.mjs', 'content.mjs', 'forecast.mjs']) await cp(path.join(ROOT, 'src', file), path.join(dir, file));
   await mkdir(path.join(dir, 'avatars'), { recursive: true });
   for (const mood of artwork) await cp(path.join(ROOT, 'template/avatars', `${mood}.png`), path.join(dir, 'avatars', `${mood}.png`));
-  await writeFile(path.join(dir, 'paper.json'), JSON.stringify({ config, facts, copy, artwork: [...artwork] }));
+  await writeFile(path.join(dir, 'paper.json'), JSON.stringify({ config, facts, words, copy, artwork: [...artwork] }));
 }
 
 const readJson = async (rel) => JSON.parse(await readFile(path.join(ROOT, rel), 'utf8'));
@@ -130,11 +129,16 @@ async function main() {
   const config = await readJson('config.json');
   const facts = await readJson('data/italy-facts.json');
   const copy = await readJson('data/weather-copy.json');
+  const words = await readJson('data/italian-words.json');
   const tz = config.location.timezone;
-  const now = args.date ? new Date(`${args.date}T06:00:00Z`) : new Date();
+  // --date prints that day's morning edition (late morning in Sydney), or evening with --edition.
+  const now = args.date ? new Date(`${args.date}T${args.edition === 'evening' ? '08' : '00'}:00:00Z`) : new Date();
+  const edition = editionAt(now, tz, args.edition);
   const artwork = new Set(await prepareAvatars());
   if (artwork.size) console.log(`Avatar artwork: ${[...artwork].join(', ')}`);
-  const weather = await getWeather(config.location, { sample: Boolean(args.sample || args.gallery), day: args.date ? undefined : localDate(now, tz) });
+  const sample = Boolean(args.sample || args.gallery);
+  const raw = await getWeather(config.location, { sample });
+  const { weather, tonight } = weatherForEdition(raw, edition, { anyDay: sample || Boolean(args.date) });
 
   const browser = await puppeteer.launch({
     executablePath: await findChrome(),
@@ -151,14 +155,14 @@ async function main() {
         // Step the date too, so each image also shows a different fact.
         const day = new Date(now.getTime() + i * 86400000);
         const fake = GALLERY[mood] && { ...weather, ...GALLERY[mood] };
-        const content = withAvatar(buildContent({ config, weather: fake, facts, copy, now: day }), artwork);
+        const content = withAvatar(buildContent({ config, weather: fake, facts, words, copy, now: day, edition: editionAt(day, tz, 'morning') }), artwork);
         await writeFile(path.join(dir, `${mood}.png`), await renderPage(browser, content));
         console.log(`gallery/${mood}.png`);
       }
       return;
     }
 
-    const content = withAvatar(buildContent({ config, weather, facts, copy, now, moodOverride: args.mood }), artwork);
+    const content = withAvatar(buildContent({ config, weather, tonight, facts, words, copy, now, edition, moodOverride: args.mood }), artwork);
     await writeFile(path.join(OUT, 'dashboard.png'), await renderPage(browser, content));
     await writeFile(path.join(OUT, 'data.json'), JSON.stringify({ generatedAt: new Date().toISOString(), ...content }, null, 2));
     await writeFile(
@@ -169,8 +173,9 @@ async function main() {
 <body style="margin:0;display:grid;place-items:center;min-height:100vh;background:#ddd">
 <iframe src="live/" width="800" height="480" title="${content.masthead}, today's front page" scrolling="no" style="border:0;display:block;background:#fff;box-shadow:0 4px 24px #0003"></iframe>`,
     );
-    await publishLivePage({ config, facts, copy, artwork });
-    console.log(`Printed ${content.issue.label}: "${content.weather.headline}" / "${content.fact.title}"`);
+    await publishLivePage({ config, facts, words, copy, artwork });
+    const feature = content.word ? `word "${content.word.word}"` : `"${content.fact.title}"`;
+    console.log(`Printed ${content.issue.label}, ${content.edition.en}: "${content.weather.headline}" / ${feature}`);
   } finally {
     await browser.close();
   }

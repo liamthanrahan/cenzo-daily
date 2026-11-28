@@ -161,12 +161,6 @@ html:not(.rendered) .story-body { background: linear-gradient(var(--ink), var(--
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -16 10.4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 html.rendered .stamp { display: none; }
-.photo figcaption {
-  font-style: italic;
-  font-size: 11px;
-  line-height: 1.2;
-  margin-top: 3px;
-}
 .w-now { flex: 1; min-width: 0; }
 #sky-icon { width: 40px; height: 40px; display: block; font: 34px/40px 'WeatherIcons'; text-align: center; }
 .temp {
@@ -203,7 +197,11 @@ html.rendered .stamp { display: none; }
 #s-uv-band { font-size: 13px; }
 
 /* ---------- Story ---------- */
-.story {
+/* Each edition shows its own parts (render.js and the script in index.html set the class). */
+html.edition-evening .only-morning,
+html:not(.edition-evening) .only-evening { display: none; }
+
+.story, .word {
   border-left: 1.5px solid var(--ink);
   padding-left: 16px;
   display: flex;
@@ -270,3 +268,30 @@ html.rendered .stamp { display: none; }
 
 /* No forecast today: hide the dangling degree signs */
 .no-weather .deg, .no-weather .tmin { visibility: hidden; }
+
+/* ---------- Word of the day (evening edition) ---------- */
+#p-head {
+  font-family: 'Headline';
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1.02;
+  height: 68px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+/* Pronunciation · part of speech: keep the stressed syllable's capitals */
+#p-dateline { text-transform: none; letter-spacing: .04em; font-weight: 400; font-style: italic; font-size: 13px; }
+.word-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 10px;
+  font-size: 27px;
+  line-height: 1.3;
+}
+.word-body .meaning { font-family: 'Headline'; font-weight: 700; }
+.word-body .example { margin-top: .7em; font-style: italic; }
+.word-body .translation { color: var(--dark); }
+.word-body .note { margin-top: .7em; padding-top: .5em; border-top: 1px solid var(--light); font-size: .72em; line-height: 1.35; }
+.word-body .note:empty { display: none; }

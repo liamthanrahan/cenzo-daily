@@ -1,9 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-tz="Australia/Sydney">
 <head>
   <meta charset="utf-8">
   <title>The Cenzo Daily</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Morning or evening edition, from the time alone, so the right labels show while the page
+    // loads. render.js sets it again from the data. Same hours as editionAt() in src/content.mjs.
+    (function () {
+      var tz = document.documentElement.dataset.tz;
+      var hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', hourCycle: 'h23' }).format(new Date()));
+      document.documentElement.classList.add(hour >= 4 && hour < 16 ? 'edition-morning' : 'edition-evening');
+    })();
+  </script>
   <!-- Open this file directly in a browser to edit the layout: it renders sample-data.js. -->
   <script src="sample-data.js"></script>
   <script src="render.js" defer></script>
@@ -29,14 +38,13 @@
 
       <!-- ===================== WEATHER ===================== -->
       <section class="weather">
-        <div class="kicker">Il Meteo <span>· Weather</span></div>
+        <div class="kicker">Il Meteo <span class="only-morning">· Weather</span><span class="only-evening">· Domani, Tomorrow</span></div>
         <h2 id="w-head" class="fit"><span id="w-headline"></span></h2>
 
         <div class="w-main">
           <figure class="photo">
             <!-- Avatar: artwork from avatars/source/, picked for today's weather (withAvatar in src/content.mjs) -->
             <img id="avatar-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="" width="138" height="146">
-            <figcaption id="w-caption"></figcaption>
           </figure>
 
           <div class="w-now">
@@ -65,17 +73,32 @@
           </tr>
           <tr>
             <td><span class="label">Alba</span><span class="label-en">Sunrise</span><b id="s-sunrise"></b></td>
-            <td><span class="label">Tramonto</span><span class="label-en">Sunset</span><b id="s-sunset"></b></td>
+            <td class="only-morning"><span class="label">Tramonto</span><span class="label-en">Sunset</span><b id="s-sunset"></b></td>
+            <td class="only-evening"><span class="label">Stanotte</span><span class="label-en">Tonight</span><b id="s-tonight"></b></td>
           </tr>
         </table>
       </section>
 
       <!-- ===================== STORY ===================== -->
-      <section class="story">
+      <!-- Morning edition: a story from the archives -->
+      <section class="story only-morning">
         <div class="kicker">Dagli Archivi <span>· From the Archives</span></div>
         <h2 id="f-head" class="fit"><span id="f-title"></span></h2>
         <div class="story-dateline" id="f-dateline">&nbsp;</div>
         <div class="story-body fit" id="f-body"><p id="f-text"></p></div>
+      </section>
+
+      <!-- Evening edition: the word of the day -->
+      <section class="word only-evening">
+        <div class="kicker">La Parola del Giorno <span>· Word of the Day</span></div>
+        <h2 id="p-head" class="fit"><span id="p-word"></span></h2>
+        <div class="story-dateline" id="p-dateline">&nbsp;</div>
+        <div class="word-body fit" id="p-body">
+          <p class="meaning" id="p-meaning"></p>
+          <p class="example" id="p-it"></p>
+          <p class="translation" id="p-en"></p>
+          <p class="note" id="p-note"></p>
+        </div>
       </section>
     </div>
 

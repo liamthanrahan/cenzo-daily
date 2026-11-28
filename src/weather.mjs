@@ -1,13 +1,10 @@
 // Gets the forecast for the build: live from Open-Meteo (free, no API key), or the sample
-// fixture for offline builds. The request itself lives in forecast.mjs, shared with the live page.
+// fixture for offline builds. Returns Open-Meteo's raw answer (or null); weatherForEdition in
+// content.mjs picks the right days out of it. The request itself lives in forecast.mjs.
 import { readFile } from 'node:fs/promises';
-import { fetchForecast, forecastFor } from './forecast.mjs';
+import { fetchForecast } from './forecast.mjs';
 
-// `day` is "YYYY-MM-DD" in the location's time zone.
-export async function getWeather(location, { sample = false, day } = {}) {
-  if (sample) {
-    const raw = JSON.parse(await readFile(new URL('../fixtures/open-meteo-sample.json', import.meta.url)));
-    return forecastFor(raw);
-  }
-  return fetchForecast(location, day);
+export async function getWeather(location, { sample = false } = {}) {
+  if (sample) return JSON.parse(await readFile(new URL('../fixtures/open-meteo-sample.json', import.meta.url)));
+  return fetchForecast(location);
 }

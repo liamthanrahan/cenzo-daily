@@ -11,7 +11,12 @@ window.SAMPLE_DATA = {
     "en": "Friday 25 December 2026",
     "it": "venerdì 25 dicembre"
   },
-  "edition": "Concord Edition",
+  "edition": {
+    "key": "morning",
+    "it": "Edizione del mattino",
+    "en": "Morning Edition",
+    "label": "Morning Edition"
+  },
   "printed": "5:00 pm",
   "weather": {
     "mood": "rain",

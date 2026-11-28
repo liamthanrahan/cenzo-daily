@@ -1,4 +1,5 @@
-// Turns config + weather + the fact list into the data object the template renders.
+// Turns config + weather + the fact and word lists into the data object the template renders.
+import { addDays, forecastFor, localDate, tonightFor } from './forecast.mjs';
 
 // WMO weather codes -> English / Italian wording and a sky icon.
 const CONDITIONS = {
@@ -56,6 +57,44 @@ export function pickMood(w, t) {
   return 'sunny';
 }
 
+// Two editions a day, by local time: morning from 4 am, evening from 4 pm. The evening edition
+// runs until 4 am, so between midnight and 4 am it's still the evening before's paper.
+// (template/index.html picks the same edition while the page loads: keep the hours in step.)
+const MORNING_FROM = 4;
+const EVENING_FROM = 16;
+const EDITIONS = {
+  morning: { it: 'Edizione del mattino', en: 'Morning Edition' },
+  evening: { it: 'Edizione della sera', en: 'Evening Edition' },
+};
+
+// Which edition is current at `now`, and the days it's about:
+//   issueDate   a moment on the paper's date (the evening before, between midnight and 4 am)
+//   forecastDay "YYYY-MM-DD" of the weather it shows: today's in the morning, tomorrow's at night
+export function editionAt(now, timeZone, key) {
+  const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', hourCycle: 'h23' }).format(now));
+  key ??= hour >= MORNING_FROM && hour < EVENING_FROM ? 'morning' : 'evening';
+  const issueDate = hour < MORNING_FROM ? new Date(now.getTime() - 86400000) : now;
+  const issueDay = localDate(issueDate, timeZone);
+  return { key, issueDate, issueDay, forecastDay: key === 'morning' ? issueDay : addDays(issueDay, 1) };
+}
+
+// Picks the edition's weather out of Open-Meteo's raw answer. With `anyDay` (sample weather, or
+// a --date beyond the forecast) a missing day falls back to today's figures, for previews.
+export function weatherForEdition(raw, edition, { anyDay = false } = {}) {
+  if (!raw) return { weather: null, tonight: null };
+  const times = raw.daily.time;
+  const day = times.includes(edition.forecastDay) || !anyDay ? edition.forecastDay : times[Math.min(1, times.length - 1)];
+  try {
+    return {
+      weather: forecastFor(raw, day),
+      tonight: edition.key === 'evening' ? tonightFor(raw, day) : null,
+    };
+  } catch (err) {
+    console.warn(`Weather: ${err.message}`);
+    return { weather: null, tonight: null };
+  }
+}
+
 // Calendar date in the dashboard's time zone, as a whole day number.
 function localDay(now, timeZone) {
   const parts = Object.fromEntries(
@@ -90,9 +129,12 @@ export const smartQuotes = (s) =>
 
 const fill = (s, vars) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
 
-export function buildContent({ config, weather, facts, copy, now = new Date(), moodOverride }) {
+// `now` is when it's printed; `edition` comes from editionAt (worked out here if not given).
+// `weather` is the forecast for the edition's forecast day, `tonight` the evening edition's night.
+export function buildContent({ config, weather, tonight = null, facts, words = [], copy, now = new Date(), edition, moodOverride }) {
   const tz = config.location.timezone;
-  const today = localDay(now, tz);
+  edition ??= editionAt(now, tz);
+  const today = localDay(edition.issueDate, tz);
   const first = Date.parse(config.firstIssue) / 86400000;
   const issueNumber = today - first + 1;
   const isPreview = issueNumber < 1;
@@ -100,6 +142,9 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), m
   // Issue 1 gets fact 1, issue 2 gets fact 2, and so on, looping when we run out.
   const factIndex = (((isPreview ? today : issueNumber - 1) % facts.length) + facts.length) % facts.length;
   const fact = facts[factIndex];
+  // The evening edition's word of the day, picked the same way.
+  const wordIndex = words.length ? (((isPreview ? today : issueNumber - 1) % words.length) + words.length) % words.length : -1;
+  const word = edition.key === 'evening' && wordIndex >= 0 ? words[wordIndex] : null;
 
   const mood = moodOverride ?? pickMood(weather, config.thresholds);
   const moodCopy = copy[mood] ?? copy.unknown;
@@ -109,7 +154,7 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), m
   const [condEn, condIt, icon] = weather ? CONDITIONS[weather.code] ?? CONDITIONS[3] : ['No forecast', 'nessuna previsione', 'cloud'];
   const uvBand = weather?.uv != null ? UV.find(([min]) => weather.uv >= min) : null;
 
-  const fmt = (locale, opts) => new Intl.DateTimeFormat(locale, { timeZone: tz, ...opts }).format(now);
+  const fmt = (locale, opts, date = edition.issueDate) => new Intl.DateTimeFormat(locale, { timeZone: tz, ...opts }).format(date);
 
   return {
     masthead: config.masthead,
@@ -121,8 +166,8 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), m
       en: fmt('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
       it: fmt('it-IT', { weekday: 'long', day: 'numeric', month: 'long' }),
     },
-    edition: `${config.location.label} Edition`,
-    printed: fmt('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, ' ').toLowerCase(),
+    edition: { key: edition.key, ...EDITIONS[edition.key], label: EDITIONS[edition.key].en },
+    printed: fmt('en-AU', { hour: 'numeric', minute: '2-digit', hour12: true }, now).replace(/\s/g, ' ').toLowerCase(),
     weather: {
       mood,
       icon,
@@ -139,8 +184,19 @@ export function buildContent({ config, weather, facts, copy, now = new Date(), m
       uvIt: uvBand?.[2] ?? '',
       sunrise: clock(weather?.sunrise),
       sunset: clock(weather?.sunset),
+      // Evening edition only: the night ahead (6 pm to 6 am).
+      tonightLow: tonight?.low ?? null,
+      tonightRain: tonight?.rainChance ?? null,
     },
     fact: { ...fact, title: smartQuotes(fact.title), text: smartQuotes(fact.text), number: factIndex + 1, total: facts.length },
+    word: word && {
+      ...word,
+      it: smartQuotes(word.it),
+      en: smartQuotes(word.en),
+      note: word.note ? smartQuotes(word.note) : null,
+      number: wordIndex + 1,
+      total: words.length,
+    },
   };
 }
 

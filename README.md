@@ -12,9 +12,16 @@ Each issue has:
 
 The device shows a web page, `/live/`, through Seeedash's HTML widget. Seeed's servers load the page at every refresh and send the device a picture of it. Each time it's loaded, the page:
 
-1. works out today's date in Sydney time (whatever time zone the renderer is in)
+1. works out which edition is current, in Sydney time (whatever time zone the renderer is in)
 2. fetches the forecast from Open-Meteo (free, no API key)
-3. fills `template/index.html` with the weather, the day's story and the right avatar
+3. fills `template/index.html` with that edition's weather, feature and avatar
+
+There are two editions a day:
+
+- **Morning edition** (4 am to 4 pm): today's forecast and a story from the archives.
+- **Evening edition** (4 pm to 4 am): tomorrow's forecast, tonight's low and chance of rain ("Stanotte"), and an Italian word of the day in place of the story. Between midnight and 4 am it's still the evening before's paper.
+
+The hours are `MORNING_FROM` and `EVENING_FROM` in `src/content.mjs`, and the small script at the top of `template/index.html` (which picks the edition while the page loads) uses the same ones.
 
 So every refresh shows that moment's paper, and nothing needs to run on a schedule. The browser code is `src/live.mjs`, using the same `src/content.mjs` and `src/forecast.mjs` as the build.
 
@@ -40,8 +47,11 @@ GitHub Actions publishes the site to GitHub Pages whenever `main` changes:
 | The avatar artwork | `avatars/source/<mood>.jpg` (see below) |
 | Weather icons | the `#sky-icon` glyphs in `template/index.html` ([Weather Icons](https://erikflowers.github.io/weather-icons/) font) |
 | What makes it "hot", "cold" or "windy" | `thresholds` in `config.json` |
-| Weather headlines and photo captions | `data/weather-copy.json` |
-| History stories | `data/italy-facts.json` |
+| Weather headlines | `data/weather-copy.json` (its photo captions aren't shown at the moment) |
+| History stories (morning) | `data/italy-facts.json` |
+| Words of the day (evening) | `data/italian-words.json` |
+
+**Words** work the same way, one per evening. Each has the word, `say` (pronunciation, stressed syllable in capitals), `type`, `meaning`, an Italian example `it` with its translation `en`, and an optional short `note`.
 
 **Stories** are shown in order, one per issue, looping when they run out. Write plain `'` and `"`; they're converted to curly quotes when printed. Long stories shrink to fit, but around 200–290 characters looks best.
 
@@ -64,7 +74,7 @@ npm run gallery     # one page per avatar mood -> out/gallery/
 
 For live layout tweaking, open `template/index.html` straight in Chrome. It renders `template/sample-data.js`.
 
-Extra flags: `--date=2027-01-01` prints a given day, and `--mood=storm` forces an avatar mood.
+Extra flags: `--date=2027-01-01` prints a given day, `--edition=evening` prints the evening edition, and `--mood=storm` forces an avatar mood.
 
 ## Setting up the repo
 
